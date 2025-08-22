@@ -1,0 +1,3132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thinking Out! - Consultora Digital de Datos | #DataSaturday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            z-index: -1;
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+            margin: 5% auto;
+            padding: 3rem;
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(120, 119, 198, 0.3);
+        }
+        
+        .close {
+            color: #999;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+        
+        .close:hover {
+            color: #fff;
+        }
+        
+        .modal h3 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 10px;
+            background: rgba(120, 119, 198, 0.05);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #7877c6;
+            box-shadow: 0 0 10px rgba(120, 119, 198, 0.3);
+        }
+        
+        .form-group input::placeholder {
+            color: #666;
+        }
+        
+        .modal-btn {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-btn:hover {
+            transform: scale(1.02);
+        }
+        
+        .modal-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(120, 119, 198, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(120, 119, 198, 0.5);
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            position: relative;
+            z-index: 2;
+            font-weight: 800;
+            font-size: 12px;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 120px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-grid {
+            display: grid;
+            place-items: center;
+            min-height: 60vh;
+        }
+        
+        .datasaturday-badge {
+            display: inline-block;
+            background: rgba(120, 119, 198, 0.1);
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            color: #7877c6;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #7877c6 50%, #ff77c6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        .hero .tagline {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            color: #b8b8b8;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: #888888;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+        
+        .hero-stat-label {
+            font-size: 0.9rem;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #7877c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #888888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Company Section */
+        .company-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .company-content h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .company-content p {
+            font-size: 1.1rem;
+            color: #b8b8b8;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: #7877c6;
+            font-weight: 600;
+        }
+        
+        .company-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(120, 119, 198, 0.05);
+            border: 1px solid rgba(120, 119, 198, 0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card-unified {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 1px solid rgba(120, 119, 198, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(120, 119, 198, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(120, 119, 198, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .feature-item .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .feature-item h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .feature-item p {
+            color: #b8b8b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card h4 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-card p {
+            color: #888888;
+            font-size: 0.95rem;
+        }
+        
+        /* Resources Section */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .resource-card {
+            background: rgba(120, 119, 198, 0.05);
+            border: 1px solid rgba(120, 119, 198, 0.2);
+            padding: 3rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(120, 119, 198, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .resource-card:hover::before {
+            left: 100%;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(120, 119, 198, 0.4);
+            box-shadow: 0 30px 60px rgba(120, 119, 198, 0.2);
+        }
+        
+        .resource-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .resource-card h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .resource-card p {
+            color: #b8b8b8;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.7;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #000000;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(120, 119, 198, 0.4);
+        }
+        
+        /* Quiz Section */
+        .quiz-section {
+            background: linear-gradient(135deg, rgba(120, 119, 198, 0.1), rgba(255, 119, 198, 0.1));
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 4rem 0;
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+        
+        .quiz-section h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-section p {
+            font-size: 1.1rem;
+            color: #b8b8b8;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .quiz-btn {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #000000;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(120, 119, 198, 0.4);
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+            padding: 5rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(120, 119, 198, 0.2);
+        }
+        
+        .newsletter-section h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+        
+        .newsletter-section p {
+            font-size: 1.1rem;
+            color: #888888;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            background: rgba(120, 119, 198, 0.1);
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid rgba(120, 119, 198, 0.3);
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: transparent;
+            color: #ffffff;
+            outline: none;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: #666666;
+        }
+        
+        .newsletter-form button {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #000000;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .newsletter-form button:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Social Media Section */
+        .social-section {
+            background: rgba(120, 119, 198, 0.05);
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(120, 119, 198, 0.2);
+        }
+        
+        .social-section h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        
+        .social-section p {
+            font-size: 1.1rem;
+            color: #888888;
+            margin-bottom: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: rgba(120, 119, 198, 0.1);
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 15px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(120, 119, 198, 0.3);
+        }
+        
+        .social-link.linkedin:hover {
+            border-color: #0077b5;
+            box-shadow: 0 15px 30px rgba(0, 119, 181, 0.3);
+        }
+        
+        .social-link.instagram:hover {
+            border-color: #e4405f;
+            box-shadow: 0 15px 30px rgba(228, 64, 95, 0.3);
+        }
+        
+        .social-link.facebook:hover {
+            border-color: #1877f2;
+            box-shadow: 0 15px 30px rgba(24, 119, 242, 0.3);
+        }
+        
+        .social-link span {
+            font-weight: 600;
+        }
+        
+        /* CEO Section */
+        .ceo-section {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+            padding: 5rem 0;
+            border-top: 1px solid rgba(120, 119, 198, 0.2);
+        }
+        
+        .ceo-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        
+        .ceo-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-radius: 20px;
+            padding: 4rem;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(120, 119, 198, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ceo-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+        }
+        
+        .ceo-name {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #000000;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ceo-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ceo-card .ceo-bio {
+            color: #000000;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ceo-card .datasaturday-badge {
+            background: rgba(0, 0, 0, 0.2);
+            color: #000000;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 700;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ceo-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-size: 4rem;
+            font-weight: 900;
+            box-shadow: 0 30px 60px rgba(120, 119, 198, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ceo-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+        }
+        
+        .ceo-content h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        
+        .ceo-title {
+            font-size: 1.2rem;
+            color: #7877c6;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .ceo-bio {
+            font-size: 1.1rem;
+            color: #b8b8b8;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #000000;
+            border-top: 1px solid rgba(120, 119, 198, 0.2);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-tagline {
+            color: #666666;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-description {
+            color: #444444;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .company-grid, .ceo-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+        }
+        
+        /* Services Unified Card */
+        .services-unified-card {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 30px 60px rgba(120, 119, 198, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .services-unified-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+        }
+        
+        .service-item {
+            position: relative;
+            z-index: 1;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-item h3 {
+            color: #000000;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .service-item p {
+            color: #000000;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .service-item strong {
+            font-weight: 700;
+        }
+        
+        .service-item.featured {
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .featured-label {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #000000;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .services-footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-price-unified {
+            background: rgba(0, 0, 0, 0.2);
+            color: #000000;
+            font-weight: 800;
+            font-size: 1.2rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        
+        /* Promotion Banner Centered */
+        .promotion-banner-center {
+            text-align: center;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .promotion-banner-center h3 {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .promotion-banner-center p {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .calendar-cta {
+            margin-top: 1.5rem;
+        }
+        
+        .calendar-link {
+            color: #7877c6;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border: 2px solid #7877c6;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .calendar-link:hover {
+            background: #7877c6;
+            color: #000;
+            transform: translateY(-3px);
+        }
+        
+        /* Calendar Modal Styles */
+        #calendar-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+        }
+        
+        .calendar-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .calendar-container {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #7877c6;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .calendar-header h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: #ff6666;
+            transform: scale(1.1);
+        }
+        
+        .calendar-month {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #7877c6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timezone-info {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(120, 119, 198, 0.2);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 700;
+            color: #ccc;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .calendar-day.empty {
+            cursor: default;
+        }
+        
+        .calendar-day.available {
+            background: #7877c6;
+            color: #fff;
+        }
+        
+        .calendar-day.available:hover {
+            background: #9b9ad6;
+            transform: scale(1.1);
+        }
+        
+        .calendar-day.disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        .calendar-day.today {
+            border: 2px solid #fff;
+        }
+        
+        .calendar-footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+        }
+        
+        .calendar-footer p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 15000;
+            min-width: 300px;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification-success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: 1px solid #4CAF50;
+        }
+        
+        .notification-error {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            border: 1px solid #f44336;
+        }
+        
+        .notification-warning {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            border: 1px solid #ff9800;
+        }
+        
+        .notification-info {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            border: 1px solid #2196F3;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: #fff;
+        }
+        
+        .notification-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .notification-message {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            margin-left: 0.5rem;
+        }
+        
+        .notification-close:hover {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
+        
+        /* Email Fallback Modal */
+        .email-fallback-content {
+            text-align: left;
+        }
+        
+        .email-fallback-content p {
+            color: #ccc;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .fallback-btn {
+            background: #7877c6;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0.5rem 0 1.5rem 0;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .fallback-btn:hover {
+            background: #9b9ad6;
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        #copy-email {
+            color: #7877c6;
+            font-family: monospace;
+            background: rgba(120, 119, 198, 0.2);
+            padding: 0.3rem 0.5rem;
+            border-radius: 5px;
+            margin: 0 0.5rem;
+        }
+        
+        .copy-btn {
+            background: #444;
+            color: #fff;
+            border: 1px solid #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #666;
+            border-color: #888;
+        }
+        
+        .message-to-copy {
+            margin-top: 1rem;
+        }
+        
+        .message-to-copy textarea {
+            width: 100%;
+            height: 120px;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 0.8rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin: 0.5rem 0;
+            resize: vertical;
+        }
+        
+        /* Pre-CTA Text Styles */
+        .pre-cta-text {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .pre-cta-text p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .pre-cta-text strong {
+            font-weight: 800;
+            color: #fff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Email Contact Section */
+        .email-contact-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(120, 119, 198, 0.1), rgba(255, 119, 198, 0.1));
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-icon {
+            background: #7877c6;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(120, 119, 198, 0.4);
+        }
+        
+        .contact-info-inline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .email-display {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(120, 119, 198, 0.5);
+        }
+        
+        .email-note {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+        
+        .email-copy-btn {
+            background: rgba(120, 119, 198, 0.2);
+            border: 1px solid #7877c6;
+            color: #fff;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .email-copy-btn:hover {
+            background: #7877c6;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(120, 119, 198, 0.4);
+        }
+        
+        .copy-icon {
+            font-size: 1rem;
+        }
+        
+        .direct-contact {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .direct-contact .email-contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        
+        .direct-contact .email-icon {
+            background: #7877c6;
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .direct-contact .email-address {
+            color: #fff;
+            font-family: monospace;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .notification {
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                top: 10px;
+            }
+            
+            .email-contact-section {
+                margin: 1.5rem 0;
+                padding: 1rem;
+            }
+            
+            .contact-method {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .email-display {
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .email-copy-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .direct-contact .email-contact {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+            
+            .calendar-container {
+                width: 95%;
+                padding: 1.5rem 1rem;
+                margin: 2% auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .calendar-header h3 {
+                font-size: 1.2rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+            
+            .calendar-grid {
+                gap: 2px;
+            }
+            
+            .calendar-day {
+                font-size: 0.85rem;
+                min-height: 35px;
+                border-radius: 6px;
+            }
+            
+            .calendar-day-header {
+                font-size: 0.8rem;
+                padding: 0.3rem;
+            }
+            
+            .calendar-day.available {
+                background: #7877c6;
+                border: 2px solid transparent;
+                transition: all 0.2s ease;
+            }
+            
+            .calendar-day.available:active {
+                background: #9b9ad6;
+                transform: scale(0.95);
+                border-color: #fff;
+            }
+            
+            .close-btn {
+                top: -5px;
+                right: -5px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
+            }
+            
+            .contact-info {
+                padding: 1rem;
+            }
+            
+            .contact-info p {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .message-to-copy textarea {
+                height: 100px;
+                font-size: 0.75rem;
+            }
+            
+            .fallback-btn {
+                padding: 1rem;
+                font-size: 1rem;
+                margin: 1rem 0;
+            }
+            
+            /* Mejores controles táctiles */
+            .calendar-day.available {
+                -webkit-tap-highlight-color: rgba(120, 119, 198, 0.3);
+                user-select: none;
+            }
+            
+            /* Evitar zoom en inputs en iOS */
+            input, textarea {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .calendar-container {
+                padding: 1rem 0.8rem;
+            }
+            
+            .calendar-header h3 {
+                font-size: 1.1rem;
+            }
+            
+            .calendar-day {
+                min-height: 32px;
+                font-size: 0.8rem;
+            }
+            
+            .notification {
+                right: 5px;
+                left: 5px;
+            }
+            
+            .notification-content {
+                padding: 0.8rem;
+            }
+            
+            .notification-message {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Landscape mobile optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .calendar-container {
+                max-height: 95vh;
+                margin: 1% auto;
+            }
+            
+            .calendar-header {
+                margin-bottom: 1rem;
+            }
+            
+            .calendar-footer {
+                padding-top: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .company-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-link {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Modales -->
+    <div id="modal-pyme" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-pyme')">&times;</span>
+            <h3>Descargar Planilla - PyMEs</h3>
+            <form id="form-pyme">
+                <div class="form-group">
+                    <label for="nombre-pyme">Nombre completo *</label>
+                    <input type="text" id="nombre-pyme" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="organizacion-pyme">Organización *</label>
+                    <input type="text" id="organizacion-pyme" placeholder="Nombre de tu empresa" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-pyme">Email *</label>
+                    <input type="email" id="email-pyme" placeholder="tu@email.com" required>
+                </div>
+                <button type="submit" class="modal-btn">Descargar Planilla</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-prof" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-prof')">&times;</span>
+            <h3>Descargar Planilla - Profesionales</h3>
+            <form id="form-prof">
+                <div class="form-group">
+                    <label for="nombre-prof">Nombre completo *</label>
+                    <input type="text" id="nombre-prof" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="organizacion-prof">Organización *</label>
+                    <input type="text" id="organizacion-prof" placeholder="Profesión independiente / Empresa" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-prof">Email *</label>
+                    <input type="email" id="email-prof" placeholder="tu@email.com" required>
+                </div>
+                <button type="submit" class="modal-btn">Descargar Planilla</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-dashboard" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-dashboard')">&times;</span>
+            <h3>Descargar Dashboard - Sector Público</h3>
+            <form id="form-dashboard">
+                <div class="form-group">
+                    <label for="nombre-dashboard">Nombre completo *</label>
+                    <input type="text" id="nombre-dashboard" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="organizacion-dashboard">Organización *</label>
+                    <input type="text" id="organizacion-dashboard" placeholder="Municipio / Organismo público" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-dashboard">Email *</label>
+                    <input type="email" id="email-dashboard" placeholder="tu@email.com" required>
+                </div>
+                <button type="submit" class="modal-btn">Descargar Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <span class="logo-text">TO!</span>
+                </div>
+                <div class="brand-name">Thinking Out!</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#empresa">Qué Hacemos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#redes">Redes</a></li>
+                <li><a href="#ceo">CEO</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <h1>Thinking Out!</h1>
+                    <p class="tagline">La única consultora especializada en pequeños gobiernos latinoamericanos</p>
+                    <p class="subtitle">Soluciones low tech & low cost totalmente personalizadas para gobiernos, PyMEs y profesionales independientes</p>
+                    
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">1</span>
+                            <div class="hero-stat-label">Año en el mercado</div>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">100%</span>
+                            <div class="hero-stat-label">Personalizado</div>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">LATAM</span>
+                            <div class="hero-stat-label">Especialización</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Company Section -->
+        <section id="empresa" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>¿Qué hace Thinking Out!?</h2>
+                    <p class="section-subtitle">Pioneros en transformación digital para pequeños gobiernos, con enfoque low cost y alta personalización</p>
+                </div>
+                
+                <div class="company-grid">
+                    <div class="company-content">
+                        <h3>Exclusivos en Latinoamérica</h3>
+                        <p>Somos <span class="highlight">la única consultora</span> especializada específicamente en pequeños gobiernos latinoamericanos, combinando deep knowledge del sector público con soluciones tecnológicas accesibles.</p>
+                        
+                        <p>Nuestro enfoque <span class="highlight">low tech & low cost</span> garantiza que cada organización, sin importar su tamaño o presupuesto, pueda acceder a soluciones de datos de nivel enterprise, completamente personalizadas.</p>
+                        
+                        <p>En solo <span class="highlight">un año</span> hemos demostrado que la innovación no requiere grandes inversiones, sino la estrategia correcta.</p>
+                    </div>
+                    
+                    <div class="company-features">
+                        <div class="feature-card-unified">
+                            <div class="features-grid">
+                                <div class="feature-item">
+                                    <div class="feature-icon">🏛️</div>
+                                    <h4>Gobiernos</h4>
+                                    <p>Administraciones públicas locales</p>
+                                </div>
+                                
+                                <div class="feature-item">
+                                    <div class="feature-icon">🏢</div>
+                                    <h4>PyMEs</h4>
+                                    <p>Pequeñas y medianas empresas</p>
+                                </div>
+                                
+                                <div class="feature-item">
+                                    <div class="feature-icon">👨‍💼</div>
+                                    <h4>Profesionales</h4>
+                                    <p>Independientes y consultores</p>
+                                </div>
+                                
+                                <div class="feature-item">
+                                    <div class="feature-icon">💡</div>
+                                    <h4>Low Tech & Low Cost</h4>
+                                    <p>Máximo impacto, mínima inversión</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servicios" class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Servicios de Transformación Digital Premium</h2>
+                    <p class="section-subtitle">Soluciones estratégicas de datos e inteligencia artificial para organizaciones que buscan resultados extraordinarios</p>
+                </div>
+                
+                <!-- Services Unified Card -->
+                <div class="services-unified-card">
+                    <div class="service-item">
+                        <h3>Digitalización Integral</h3>
+                        <p>Transformamos <strong>procesos manuales</strong> en flujos digitales eficientes que revolucionan tu operación.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3>Transformación & Modernización</h3>
+                        <p>Renovamos tu <strong>infraestructura tecnológica</strong> para competir en la economía digital del siglo XXI.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3>Estandarización de Procesos</h3>
+                        <p>Establecemos <strong>protocolos empresariales</strong> que garantizan consistencia y escalabilidad.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3>Automatización Inteligente</h3>
+                        <p>Implementamos <strong>soluciones de IA</strong> que eliminan tareas repetitivas y potencian la productividad.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3>Integración de Sistemas</h3>
+                        <p>Conectamos tus aplicaciones para crear un <strong>ecosistema tecnológico unificado</strong>.</p>
+                    </div>
+                    
+                    <div class="service-item featured">
+                        <h3>Dashboards en Tiempo Real</h3>
+                        <p>Desarrollamos <strong>paneles ejecutivos</strong> para monitorear KPIs críticos y tomar decisiones estratégicas.</p>
+                        <div class="featured-label">Más Solicitado</div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3>Capacitación Especializada</h3>
+                        <p>Programas de <strong>formación ejecutiva</strong> para dominar herramientas de gestión de datos moderna.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h3>Consultoría Estratégica</h3>
+                        <p><strong>Asesoramiento ejecutivo</strong> para definir estrategias de datos y maximizar el ROI de proyectos digitales.</p>
+                    </div>
+                    
+                    <div class="services-footer">
+                        <div class="service-price-unified">Presupuesto Personalizado según volumen y madurez de datos</div>
+                    </div>
+                </div>
+                
+                <!-- Promotion Banner After Services -->
+                <div class="promotion-banner-center">
+                    <h3>Oferta Especial - Solo Este Mes</h3>
+                    <p>Los primeros 5 diagnósticos del mes son <strong>BONIFICADOS</strong><br>
+                    Evaluación completa de madurez digital de tu organización sin costo</p>
+                    
+                    <div class="pre-cta-text">
+                        <p><strong>¿Listo para transformar tu organización?</strong><br>
+                        Agenda una consulta estratégica gratuita y descubre cómo podemos potenciar tu negocio</p>
+                    </div>
+                    
+                    <!-- Email Contact Section -->
+                    <div class="email-contact-section">
+                        <div class="contact-method">
+                            <div class="contact-icon">@</div>
+                            <div class="contact-info-inline">
+                                <span class="email-display">thinkingout.consultora@gmail.com</span>
+                                <span class="email-note">Todas las consultas por email • Respuesta en horario laboral</span>
+                            </div>
+                            <button onclick="copyToClipboard('thinkingout.consultora@gmail.com')" class="email-copy-btn">
+                                <span class="copy-icon">📋</span>
+                                Copiar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-cta">
+                        <strong><a href="javascript:void(0)" onclick="openCalendar()" class="calendar-link">Agendar Diagnóstico BONIFICADO</a></strong>
+                    </div>
+                </div>
+                
+
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="recursos" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Recursos de alto valor para administrar tus datos</h2>
+                    <p class="section-subtitle">Herramientas profesionales desarrolladas por expertos para potenciar tu organización</p>
+                </div>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="download-icon" style="margin: 0 auto 1.5rem auto; color: #7877c6; text-align: center; font-size: 3.5rem;">
+                            🏭
+                        </div>
+                        <h3>Punto de Equilibrio & Apalancamiento - PyMEs</h3>
+                        <p>Suite completa de análisis financiero con calculadoras avanzadas de punto de equilibrio y métricas de apalancamiento operativo diseñadas específicamente para PyMEs.</p>
+                        <button class="download-btn" onclick="openModal('modal-pyme')">Descargar Planilla</button>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="download-icon" style="margin: 0 auto 1.5rem auto; color: #7877c6; text-align: center; font-size: 3.5rem;">
+                            🛠️
+                        </div>
+                        <h3>Punto de Equilibrio - Profesionales</h3>
+                        <p>Herramienta especializada para profesionales independientes y consultores, con métricas adaptadas a modelos de negocio de servicios personalizados.</p>
+                        <button class="download-btn" onclick="openModal('modal-prof')">Descargar Planilla</button>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="download-icon" style="margin: 0 auto 1.5rem auto; color: #7877c6; text-align: center; font-size: 3.5rem;">
+                            📊
+                        </div>
+                        <h3>Dashboard KPI - Sector Público</h3>
+                        <p>Panel de control con 3 indicadores clave diseñados específicamente para gobiernos locales, con métricas de eficiencia, transparencia y gestión ciudadana.</p>
+                        <button class="download-btn" onclick="openModal('modal-dashboard')">Descargar Dashboard</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="quiz-section">
+            <div class="container">
+                <h3>Matriz de Madurez Digital</h3>
+                <p>Evalúa el nivel de gestión de datos de tu organización con nuestro assessment de 15 preguntas. Descubre en qué cuadrante se encuentra tu empresa y obtén recomendaciones personalizadas para evolucionar.</p>
+                <button class="quiz-btn" onclick="startQuiz()">Iniciar Evaluación</button>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="newsletter-section">
+            <div class="container">
+                <h3>DATA Elemental</h3>
+                <p>Todo lo que tenes que saber de data: noticias, herramientas, tendencias, tips, consejos prácticos y contenido especializado para gobiernos, PyMEs y profesionales de Latinoamérica.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="tu@email.com" required>
+                    <button type="submit">Suscribirme</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Social Media Section -->
+        <section id="redes" class="social-section">
+            <div class="container">
+                <h3>Síguenos en nuestras redes</h3>
+                <p>Mantente conectado con las últimas novedades y contenido exclusivo</p>
+                <div class="social-links">
+                    <a href="https://linkedin.com/company/thinking-out-consultora" target="_blank" class="social-link linkedin">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <span>Thinking Out! - Consultora</span>
+                    </a>
+                    <a href="https://instagram.com/thinkingout.consultora" target="_blank" class="social-link instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        <span>@thinkingout.consultora</span>
+                    </a>
+                    <a href="https://facebook.com/ThinkingOut" target="_blank" class="social-link facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        <span>Thinking Out</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CEO Section -->
+        <section id="ceo" class="ceo-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>CEO & Founder</h2>
+                    <p class="section-subtitle">Conoce la historia detrás de Thinking Out!</p>
+                </div>
+                
+                <div class="ceo-card">
+                    <div class="ceo-name">EMANUEL TOLEDO</div>
+                    <div class="ceo-title">CEO & Founder</div>
+                        
+                        <p class="ceo-bio">
+                            <strong>Licenciado en Gestión Pública</strong> con especialización en Administración, Ciencia de Datos e IA aplicada al sector público. Con 13 años de experiencia en administración pública y 8 años especializándose en ciencia de datos.
+                        </p>
+                        
+                        <p class="ceo-bio">
+                            Fundé <strong>Thinking Out!</strong> con la visión de democratizar el acceso a soluciones de datos inteligentes, creando la primera consultora especializada en pequeños gobiernos latinoamericanos.
+                        </p>
+                        
+                        <p class="ceo-bio">
+                            Mi experiencia combinando el sector público con la innovación tecnológica me permite ofrecer soluciones que realmente funcionan en el contexto latinoamericano.
+                        </p>
+                        
+                        <p class="ceo-bio">
+                            Más allá de la consultoría, soy <strong>padre de 2 niños</strong> y estoy <strong>en pareja con Flor desde hace 14 años</strong>. Esta estabilidad familiar es la base que me permite innovar con confianza y construir soluciones que realmente impacten en las organizaciones y comunidades de Latinoamérica.
+                        </p>
+                        
+                        <div class="datasaturday-badge" style="margin-top: 2rem;">#DataSaturday Speaker</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Thinking Out!</div>
+                <div class="footer-tagline">La única consultora digital especializada en pequeños gobiernos latinoamericanos</div>
+                <div class="footer-description">Soluciones low tech & low cost totalmente personalizadas | 1 año transformando organizaciones</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Google Sheets API configuration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxJb2j-LGi5KPH3Wuq8UfgWvZ9NvCHvDbGdR8/exec';
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Send data to Google Sheets and download file
+        async function sendDataAndDownload(data, downloadType) {
+            try {
+                // Send data to Google Sheets
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...data,
+                        type: downloadType,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                // Start download based on type
+                if (downloadType === 'pyme') {
+                    downloadPymeSheet(data);
+                } else if (downloadType === 'profesional') {
+                    downloadProfSheet(data);
+                } else if (downloadType === 'dashboard') {
+                    downloadDashboard(data);
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Error sending data:', error);
+                // Still allow download even if tracking fails
+                if (downloadType === 'pyme') {
+                    downloadPymeSheet(data);
+                } else if (downloadType === 'profesional') {
+                    downloadProfSheet(data);
+                } else if (downloadType === 'dashboard') {
+                    downloadDashboard(data);
+                }
+                return false;
+            }
+        }
+
+        // Download functions
+        function downloadPymeSheet(data) {
+            const csvContent = `Planilla Punto de Equilibrio PyMEs
+Descargada por: ${data.nombre}
+Organización: ${data.organizacion}
+Email: ${data.email}
+Fecha: ${new Date().toLocaleDateString()}
+
+INSTRUCCIONES:
+Esta planilla está diseñada para PyMEs que necesitan calcular su punto de equilibrio
+y analizar métricas de apalancamiento operativo.
+
+SECCIONES:
+1. Datos de la Empresa
+2. Costos Fijos Mensuales
+3. Costos Variables por Unidad
+4. Precio de Venta por Unidad
+5. Cálculo de Punto de Equilibrio
+6. Análisis de Apalancamiento
+
+FÓRMULAS PRINCIPALES:
+- Punto de Equilibrio (unidades) = Costos Fijos / (Precio - Costo Variable Unitario)
+- Punto de Equilibrio ($) = Punto de Equilibrio (unidades) × Precio
+- Apalancamiento Operativo = (Ventas - Costos Variables) / (Ventas - Costos Variables - Costos Fijos)
+
+Para más información, visite: www.thinkingout.com`;
+            
+            downloadFile(csvContent, 'Punto_Equilibrio_PyMEs.csv');
+        }
+
+        function downloadProfSheet(data) {
+            const csvContent = `Planilla Punto de Equilibrio Profesionales
+Descargada por: ${data.nombre}
+Organización: ${data.organizacion}
+Email: ${data.email}
+Fecha: ${new Date().toLocaleDateString()}
+
+INSTRUCCIONES:
+Esta planilla está adaptada para profesionales independientes y consultores
+que facturan por servicios o proyectos.
+
+SECCIONES:
+1. Datos del Profesional
+2. Costos Fijos Mensuales (oficina, software, seguros, etc.)
+3. Tiempo dedicado por proyecto/servicio
+4. Tarifa por hora/proyecto
+5. Cálculo de Punto de Equilibrio
+6. Proyección de ingresos necesarios
+
+MÉTRICAS ESPECIALES PARA PROFESIONALES:
+- Horas facturables mínimas por mes
+- Tarifa mínima por proyecto
+- Margen de seguridad recomendado
+
+Para más información, visite: www.thinkingout.com`;
+            
+            downloadFile(csvContent, 'Punto_Equilibrio_Profesionales.csv');
+        }
+
+        function downloadDashboard(data) {
+            const csvContent = `Dashboard KPI Sector Público
+Descargado por: ${data.nombre}
+Organización: ${data.organizacion}
+Email: ${data.email}
+Fecha: ${new Date().toLocaleDateString()}
+
+DASHBOARD INCLUYE 3 KPIs FUNDAMENTALES:
+
+1. EFICIENCIA OPERATIVA
+   - Tiempo promedio de resolución de trámites
+   - Porcentaje de procesos digitalizados
+   - Reducción de tiempos vs período anterior
+
+2. TRANSPARENCIA Y ACCESO A LA INFORMACIÓN
+   - Solicitudes de información atendidas en tiempo
+   - Publicaciones proactivas realizadas
+   - Índice de transparencia municipal
+
+3. GESTIÓN CIUDADANA
+   - Tiempo de respuesta a consultas ciudadanas
+   - Satisfacción ciudadana (encuestas)
+   - Participación en consultas públicas
+
+CONFIGURACIÓN RECOMENDADA:
+- Actualización mensual
+- Revisión trimestral de metas
+- Reportes ejecutivos automáticos
+
+Para más información, visite: www.thinkingout.com`;
+            
+            downloadFile(csvContent, 'Dashboard_KPI_Sector_Publico.csv');
+        }
+
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Form handlers
+        document.getElementById('form-pyme').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('nombre-pyme').value,
+                organizacion: document.getElementById('organizacion-pyme').value,
+                email: document.getElementById('email-pyme').value
+            };
+            
+            await sendDataAndDownload(data, 'pyme');
+            closeModal('modal-pyme');
+            alert('¡Descarga iniciada! Revisa tu carpeta de descargas.');
+            this.reset();
+        });
+
+        document.getElementById('form-prof').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('nombre-prof').value,
+                organizacion: document.getElementById('organizacion-prof').value,
+                email: document.getElementById('email-prof').value
+            };
+            
+            await sendDataAndDownload(data, 'profesional');
+            closeModal('modal-prof');
+            alert('¡Descarga iniciada! Revisa tu carpeta de descargas.');
+            this.reset();
+        });
+
+        document.getElementById('form-dashboard').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('nombre-dashboard').value,
+                organizacion: document.getElementById('organizacion-dashboard').value,
+                email: document.getElementById('email-dashboard').value
+            };
+            
+            await sendDataAndDownload(data, 'dashboard');
+            closeModal('modal-dashboard');
+            alert('¡Descarga iniciada! Revisa tu carpeta de descargas.');
+            this.reset();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`¡Gracias por suscribirte al Data Simple Newsletter! Te enviaremos contenido exclusivo a: ${email}`);
+            this.reset();
+        });
+
+        // Quiz function
+        function startQuiz() {
+            // El quiz está disponible como componente React separado
+            alert('¡Quiz de Madurez Digital disponible! Evalúa el nivel de gestión de datos de tu organización con 15 preguntas especializadas.');
+        }
+        
+        let userData = {};
+        
+        // Calendar function with validation
+        function openCalendar() {
+            try {
+                // Solicitar datos del usuario con validación
+                const nombreCompleto = prompt('Ingresa tu nombre completo:');
+                if (!nombreCompleto || nombreCompleto.trim() === '') {
+                    showNotification('Para continuar necesitamos tu nombre. ¡Inténtalo de nuevo!', 'warning');
+                    return;
+                }
+                
+                const telefono = prompt('Ingresa tu número de teléfono (con código de país si es necesario):');
+                if (!telefono || telefono.trim() === '') {
+                    showNotification('Para contactarte necesitamos tu teléfono. ¡Inténtalo de nuevo!', 'warning');
+                    return;
+                }
+                
+                // Validar y formatear datos con nueva función mejorada
+                const validation = validateAndFormatUserData(nombreCompleto, telefono);
+                
+                if (!validation.valid) {
+                    const errorMessage = validation.errors.join('\n• ');
+                    showNotification(`Por favor corrige los siguientes errores:\n• ${errorMessage}`, 'error');
+                    return;
+                }
+                
+                // Guardar datos validados y formateados
+                userData = validation.formattedData;
+                
+                // Guardar lead inicial en Google Sheets
+                saveLeadToSheet({
+                    tipo: 'Diagnóstico BONIFICADO',
+                    nombre: userData.nombre,
+                    telefono: userData.telefono,
+                    servicio: 'Diagnóstico de Madurez Digital',
+                    fuente: 'Calendario Landing Page'
+                });
+                
+                showNotification(`¡Perfecto ${validation.formattedData.nombre.split(' ')[0]}! Ahora selecciona tu fecha preferida.`, 'success');
+                
+                // Mostrar calendario
+                showCalendar();
+                
+            } catch (error) {
+                console.error('Error in openCalendar:', error);
+                showNotification('Ocurrió un error. Por favor intenta de nuevo o contacta directamente a thinkingout.consultora@gmail.com', 'error');
+            }
+        }
+        
+        function showCalendar() {
+            try {
+                // Verificar que no haya otro calendario abierto
+                const existingModal = document.getElementById('calendar-modal');
+                if (existingModal) {
+                    existingModal.remove();
+                }
+                
+                // Crear modal del calendario
+                const modal = document.createElement('div');
+                modal.id = 'calendar-modal';
+                modal.innerHTML = `
+                    <div class="calendar-backdrop" onclick="closeCalendar()">
+                        <div class="calendar-container" onclick="event.stopPropagation()">
+                            <div class="calendar-header">
+                                <h3>Selecciona el día para tu diagnóstico BONIFICADO</h3>
+                                <button onclick="closeCalendar()" class="close-btn">&times;</button>
+                            </div>
+                            <div id="calendar-content">Cargando calendario...</div>
+                            <div class="calendar-footer">
+                                <p><strong>Días disponibles:</strong> Solo lunes a viernes a partir del próximo día hábil</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Renderizar calendario después de que el modal esté en el DOM
+                setTimeout(() => {
+                    renderCalendar();
+                }, 100);
+                
+            } catch (error) {
+                console.error('Error showing calendar:', error);
+                showNotification('Error al abrir el calendario. Por favor contacta directamente a thinkingout.consultora@gmail.com', 'error');
+            }
+        }
+        
+        function renderCalendar() {
+            try {
+                // Usar zona horaria local argentina (UTC-3) como referencia de negocio
+                const now = getCurrentArgentinaDate();
+                const year = now.getFullYear();
+                const month = now.getMonth();
+                const today = now.getDate();
+                const currentDay = now.getDay(); // 0 = domingo, 1 = lunes...
+                
+                // Nombres de los meses
+                const monthNames = [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'October', 'Noviembre', 'Diciembre'
+                ];
+                
+                // Primer día del mes y último día del mes
+                const firstDay = new Date(year, month, 1).getDay();
+                const lastDay = new Date(year, month + 1, 0).getDate();
+                
+                // Calcular el próximo día hábil con lógica mejorada
+                const nextBusinessDay = getNextBusinessDay(now);
+                
+                // Si el próximo día hábil está en el siguiente mes, mostrarlo
+                let displayMonth = month;
+                let displayYear = year;
+                let businessDayOfMonth = nextBusinessDay.getDate();
+                
+                if (nextBusinessDay.getMonth() !== month) {
+                    // Si necesitamos mostrar el siguiente mes
+                    displayMonth = nextBusinessDay.getMonth();
+                    displayYear = nextBusinessDay.getFullYear();
+                    businessDayOfMonth = 1;
+                }
+                
+                let calendarHTML = `
+                    <div class="calendar-month">${monthNames[displayMonth]} ${displayYear}</div>
+                    <div class="timezone-info">Hora Argentina (UTC-3) - Hoy: ${formatDateForDisplay(now)}</div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Dom</div>
+                        <div class="calendar-day-header">Lun</div>
+                        <div class="calendar-day-header">Mar</div>
+                        <div class="calendar-day-header">Mié</div>
+                        <div class="calendar-day-header">Jue</div>
+                        <div class="calendar-day-header">Vie</div>
+                        <div class="calendar-day-header">Sáb</div>
+                `;
+                
+                // Usar las fechas del mes que se está mostrando
+                const displayFirstDay = new Date(displayYear, displayMonth, 1).getDay();
+                const displayLastDay = new Date(displayYear, displayMonth + 1, 0).getDate();
+                
+                // Espacios vacíos para los días antes del primer día del mes
+                for (let i = 0; i < displayFirstDay; i++) {
+                    calendarHTML += `<div class="calendar-day empty"></div>`;
+                }
+                
+                // Días del mes
+                for (let day = 1; day <= displayLastDay; day++) {
+                    const currentDate = new Date(displayYear, displayMonth, day);
+                    const dayOfWeek = currentDate.getDay();
+                    const isPast = isDateInPast(currentDate, now);
+                    const isBeforeBusinessDay = currentDate < nextBusinessDay;
+                    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6; // Domingo o sábado
+                    const isAvailable = !isPast && !isBeforeBusinessDay && !isWeekend;
+                    
+                    let dayClass = 'calendar-day';
+                    let clickHandler = '';
+                    
+                    if (isPast || isBeforeBusinessDay || isWeekend) {
+                        dayClass += ' disabled';
+                    } else {
+                        dayClass += ' available';
+                        clickHandler = `onclick="selectDate(${day}, ${displayMonth + 1}, ${displayYear})"`;
+                    }
+                    
+                    if (isSameDay(currentDate, now)) {
+                        dayClass += ' today';
+                    }
+                    
+                    calendarHTML += `<div class="${dayClass}" ${clickHandler}>${day}</div>`;
+                }
+                
+                calendarHTML += `</div>`;
+                
+                const calendarContent = document.getElementById('calendar-content');
+                if (calendarContent) {
+                    calendarContent.innerHTML = calendarHTML;
+                } else {
+                    throw new Error('Calendar content container not found');
+                }
+                
+            } catch (error) {
+                console.error('Error rendering calendar:', error);
+                showNotification('Error al cargar el calendario. Por favor intenta de nuevo.', 'error');
+            }
+        }
+        
+        function selectDate(day, month, year) {
+            try {
+                // Validar que los datos del usuario estén disponibles
+                if (!userData || !userData.nombre || !userData.telefono) {
+                    showNotification('Error: Datos de usuario no encontrados. Por favor intenta de nuevo.', 'error');
+                    closeCalendar();
+                    return;
+                }
+                
+                // Validar fecha
+                const selectedDate = new Date(year, month - 1, day);
+                const now = new Date();
+                
+                if (selectedDate < now.setHours(0,0,0,0)) {
+                    showNotification('No puedes seleccionar una fecha pasada.', 'warning');
+                    return;
+                }
+                
+                const dayOfWeek = selectedDate.getDay();
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    showNotification('Solo puedes seleccionar días de lunes a viernes.', 'warning');
+                    return;
+                }
+                
+                const formattedDate = `${day}/${month}/${year}`;
+                
+                // Confirmar la fecha seleccionada
+                const confirm = window.confirm(`¿Confirmas que quieres agendar tu diagnóstico BONIFICADO para el ${formattedDate}?`);
+                
+                if (confirm) {
+                    // Guardar lead confirmado con fecha en Google Sheets
+                    saveLeadToSheet({
+                        tipo: 'Diagnóstico CONFIRMADO',
+                        nombre: userData.nombre,
+                        telefono: userData.telefono,
+                        servicio: 'Diagnóstico de Madurez Digital',
+                        fechaSolicitada: formattedDate,
+                        fuente: 'Calendario - Confirmación'
+                    });
+                    
+                    // Enviar email con todos los datos
+                    sendAppointmentEmail(day, month, year);
+                    closeCalendar();
+                }
+                
+            } catch (error) {
+                console.error('Error selecting date:', error);
+                showNotification('Error al seleccionar la fecha. Por favor intenta de nuevo.', 'error');
+            }
+        }
+        
+        function sendAppointmentEmail(day, month, year) {
+            try {
+                const monthNames = [
+                    '', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+                ];
+                
+                const selectedDate = `${day} de ${monthNames[month]} de ${year}`;
+                
+                const subject = 'Solicitud Diagnóstico BONIFICADO - Thinking Out!';
+                const body = `Hola Emanuel,\n\nSolicito agendar mi diagnóstico BONIFICADO de madurez digital.\n\nMis datos:\n• Nombre: ${userData.nombre}\n• Teléfono: ${userData.telefono}\n• Fecha solicitada: ${selectedDate}\n\nPor favor confirma la disponibilidad horaria para esta fecha.\n\nGracias,\n${userData.nombre}`;
+                
+                const mailtoLink = `mailto:thinkingout.consultora@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Detectar dispositivo móvil
+                const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                    // En móviles, mostrar alternativas si falla
+                    showEmailFallback(mailtoLink, userData.nombre, userData.telefono, selectedDate);
+                } else {
+                    // En desktop, intentar abrir cliente de email
+                    window.location.href = mailtoLink;
+                    
+                    // Mostrar confirmación después de un segundo
+                    setTimeout(() => {
+                        showNotification('Si no se abrió tu cliente de email, copia este email: thinkingout.consultora@gmail.com', 'info');
+                    }, 2000);
+                }
+                
+                showNotification('¡Solicitud enviada! Te contactaremos pronto.', 'success');
+                
+            } catch (error) {
+                console.error('Error sending email:', error);
+                showEmailFallback('', userData.nombre, userData.telefono, `${day}/${month}/${year}`);
+            }
+        }
+        
+        function closeCalendar() {
+            try {
+                const modal = document.getElementById('calendar-modal');
+                if (modal) {
+                    modal.remove();
+                }
+            } catch (error) {
+                console.error('Error closing calendar:', error);
+            }
+        }
+        
+        // Enhanced validation functions
+        function isValidName(name) {
+            if (!name || typeof name !== 'string') return false;
+            
+            const trimmedName = name.trim();
+            
+            // Verificar longitud mínima
+            if (trimmedName.length < 2) return false;
+            
+            // Verificar longitud máxima (evitar nombres extremadamente largos)
+            if (trimmedName.length > 100) return false;
+            
+            // Verificar que tenga al menos una letra
+            if (!/[a-zA-ZÀ-ſẠ-ỹ]/.test(trimmedName)) return false;
+            
+            // Permitir letras (incluye acentos), espacios, apóstrofes y guiones
+            const nameRegex = /^[a-zA-ZÀ-ſẠ-ỹ\s'.-]+$/;
+            if (!nameRegex.test(trimmedName)) return false;
+            
+            // Verificar que no sea solo espacios o caracteres especiales
+            if (/^[\s'.-]+$/.test(trimmedName)) return false;
+            
+            // Verificar que tenga al menos 2 letras (no solo una inicial)
+            const letterCount = (trimmedName.match(/[a-zA-ZÀ-ſẠ-ỹ]/g) || []).length;
+            if (letterCount < 2) return false;
+            
+            return true;
+        }
+        
+        function isValidPhone(phone) {
+            if (!phone || typeof phone !== 'string') return false;
+            
+            // Limpiar el teléfono de espacios, guiones, paréntesis
+            const cleanPhone = phone.replace(/[\s\-()._]/g, '');
+            
+            // Verificar longitud
+            if (cleanPhone.length < 8 || cleanPhone.length > 20) return false;
+            
+            // Patrones comunes de teléfonos internacionales
+            const phonePatterns = [
+                /^\+?[1-9]\d{7,19}$/, // Internacional general
+                /^\+54[0-9]{10,11}$/, // Argentina
+                /^\+1[0-9]{10}$/, // USA/Canadá
+                /^\+34[0-9]{9}$/, // España
+                /^\+52[0-9]{10}$/, // México
+                /^\+56[0-9]{8,9}$/, // Chile
+                /^\+57[0-9]{10}$/, // Colombia
+                /^\+51[0-9]{9}$/, // Perú
+                /^\+598[0-9]{8}$/, // Uruguay
+                /^[0-9]{8,15}$/ // Sin código de país
+            ];
+            
+            return phonePatterns.some(pattern => pattern.test(cleanPhone));
+        }
+        
+        function formatPhoneNumber(phone) {
+            if (!phone) return '';
+            
+            // Limpiar y formatear el teléfono
+            let cleanPhone = phone.replace(/[^\d+]/g, '');
+            
+            // Si no tiene código de país y parece ser argentino (11 dígitos), agregar +54
+            if (!/^\+/.test(cleanPhone) && cleanPhone.length === 11 && cleanPhone.startsWith('11')) {
+                cleanPhone = '+54' + cleanPhone;
+            }
+            
+            return cleanPhone;
+        }
+        
+        function validateAndFormatUserData(nombre, telefono) {
+            const errors = [];
+            
+            // Validar nombre
+            if (!isValidName(nombre)) {
+                if (!nombre || nombre.trim().length === 0) {
+                    errors.push('El nombre es obligatorio');
+                } else if (nombre.trim().length < 2) {
+                    errors.push('El nombre debe tener al menos 2 caracteres');
+                } else if (nombre.trim().length > 100) {
+                    errors.push('El nombre es demasiado largo');
+                } else if (!/[a-zA-ZÀ-ſẠ-ỹ]/.test(nombre)) {
+                    errors.push('El nombre debe contener letras');
+                } else {
+                    errors.push('El nombre contiene caracteres no válidos');
+                }
+            }
+            
+            // Validar teléfono
+            if (!isValidPhone(telefono)) {
+                if (!telefono || telefono.trim().length === 0) {
+                    errors.push('El teléfono es obligatorio');
+                } else if (telefono.replace(/[^\d]/g, '').length < 8) {
+                    errors.push('El teléfono debe tener al menos 8 dígitos');
+                } else if (telefono.replace(/[^\d]/g, '').length > 20) {
+                    errors.push('El teléfono es demasiado largo');
+                } else {
+                    errors.push('Formato de teléfono inválido. Ej: +54 11 1234 5678');
+                }
+            }
+            
+            return {
+                valid: errors.length === 0,
+                errors: errors,
+                formattedData: {
+                    nombre: nombre ? nombre.trim() : '',
+                    telefono: formatPhoneNumber(telefono)
+                }
+            };
+        }
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-icon">${getNotificationIcon(type)}</span>
+                    <span class="notification-message">${message}</span>
+                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification && notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        function getNotificationIcon(type) {
+            switch(type) {
+                case 'success': return '✓';
+                case 'error': return '⚠';
+                case 'warning': return '⚠';
+                default: return 'ℹ';
+            }
+        }
+        
+        // Email fallback for mobile devices
+        function showEmailFallback(mailtoLink, nombre, telefono, fecha) {
+            const fallbackModal = document.createElement('div');
+            fallbackModal.id = 'email-fallback-modal';
+            fallbackModal.innerHTML = `
+                <div class="calendar-backdrop" onclick="document.getElementById('email-fallback-modal').remove()">
+                    <div class="calendar-container" onclick="event.stopPropagation()">
+                        <div class="calendar-header">
+                            <h3>¡Tu solicitud está lista!</h3>
+                            <button onclick="document.getElementById('email-fallback-modal').remove()" class="close-btn">&times;</button>
+                        </div>
+                        <div class="email-fallback-content">
+                            <p><strong>Opción 1:</strong> Hacer click para abrir tu app de email</p>
+                            <button onclick="window.location.href='${mailtoLink}'" class="fallback-btn primary">Abrir Email</button>
+                            
+                            <p><strong>Opción 2:</strong> Copia la información y envíala manualmente</p>
+                            <div class="contact-info">
+                                <p><strong>Email:</strong> <span id="copy-email">thinkingout.consultora@gmail.com</span> 
+                                <button onclick="copyToClipboard('thinkingout.consultora@gmail.com')" class="copy-btn">Copiar</button></p>
+                                
+                                <div class="message-to-copy">
+                                    <strong>Mensaje:</strong><br>
+                                    <textarea readonly id="message-text">Hola Emanuel,\n\nSolicito agendar mi diagnóstico BONIFICADO de madurez digital.\n\nMis datos:\n• Nombre: ${nombre}\n• Teléfono: ${telefono}\n• Fecha solicitada: ${fecha}\n\nPor favor confirma la disponibilidad horaria.\n\nGracias,\n${nombre}</textarea>
+                                    <button onclick="copyToClipboard(document.getElementById('message-text').value)" class="copy-btn">Copiar Mensaje</button>
+                                </div>
+                            </div>
+                            
+                            <p><strong>Opción 3:</strong> Llamar directamente (si tienes el teléfono)</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(fallbackModal);
+        }
+        
+        function copyToClipboard(text) {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showNotification('¡Copiado!', 'success');
+                    }).catch(() => {
+                        fallbackCopyToClipboard(text);
+                    });
+                } else {
+                    fallbackCopyToClipboard(text);
+                }
+            } catch (error) {
+                console.error('Copy error:', error);
+                showNotification('No se pudo copiar. Selecciónalo manualmente.', 'warning');
+            }
+        }
+        
+        function fallbackCopyToClipboard(text) {
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    showNotification('¡Copiado!', 'success');
+                } else {
+                    throw new Error('Copy command failed');
+                }
+            } catch (error) {
+                console.error('Fallback copy failed:', error);
+                showNotification('No se pudo copiar automáticamente. Selecciónalo y copia manualmente (Ctrl+C).', 'warning');
+            }
+        }
+        
+        // Touch event optimization for mobile
+        function addTouchSupport() {
+            try {
+                // Detectar si es dispositivo táctil
+                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                
+                if (isTouchDevice) {
+                    // Agregar clase para identificar dispositivos táctiles
+                    document.body.classList.add('touch-device');
+                    
+                    // Mejorar rendimiento de scroll en móviles
+                    document.addEventListener('touchmove', function(e) {
+                        // Permitir scroll solo en elementos scrolleables
+                        if (e.target.closest('.calendar-container') || e.target.closest('.message-to-copy textarea')) {
+                            return;
+                        }
+                        e.preventDefault();
+                    }, { passive: false });
+                }
+            } catch (error) {
+                console.error('Error adding touch support:', error);
+            }
+        }
+        
+        // Inicializar soporte táctil cuando carga la página
+        document.addEventListener('DOMContentLoaded', addTouchSupport);
+        
+        // Si el DOM ya está cargado
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addTouchSupport);
+        } else {
+            addTouchSupport();
+        }
+        
+        // Google Sheets Integration
+        // Google Apps Script URL - CONFIGURADO
+        const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzE21Y1Jo4IBZwf4mLBqaWNvZMwGgsk7rrbfhs4xJUvF_8xEA4RajMZO7kJCRbZoxskEQ/exec';
+        
+        async function saveLeadToSheet(leadData) {
+            try {
+                const response = await fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        tipo: leadData.tipo,
+                        nombre: leadData.nombre,
+                        email: leadData.email || '',
+                        telefono: leadData.telefono || '',
+                        organizacion: leadData.organizacion || '',
+                        servicio: leadData.servicio || '',
+                        fechaSolicitada: leadData.fechaSolicitada || '',
+                        fuente: leadData.fuente || 'Landing Page',
+                        navegador: navigator.userAgent,
+                        ip: 'Auto-detectada'
+                    })
+                });
+                
+                console.log('Lead guardado en Google Sheets');
+                return true;
+            } catch (error) {
+                console.error('Error guardando lead:', error);
+                // No mostrar error al usuario, solo loguear
+                return false;
+            }
+        }
+        
+        // Timezone and date handling functions
+        function getCurrentArgentinaDate() {
+            try {
+                // Obtener fecha en zona horaria de Argentina (UTC-3)
+                const now = new Date();
+                const argentinaOffset = -3; // UTC-3
+                const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+                const argentinaTime = new Date(utc + (argentinaOffset * 3600000));
+                return argentinaTime;
+            } catch (error) {
+                console.warn('Error getting Argentina time, using local time:', error);
+                return new Date();
+            }
+        }
+        
+        function getNextBusinessDay(currentDate) {
+            const date = new Date(currentDate);
+            const dayOfWeek = date.getDay();
+            
+            // Si es viernes (5), el próximo día hábil es lunes (+3 días)
+            if (dayOfWeek === 5) {
+                date.setDate(date.getDate() + 3);
+            }
+            // Si es sábado (6), el próximo día hábil es lunes (+2 días)
+            else if (dayOfWeek === 6) {
+                date.setDate(date.getDate() + 2);
+            }
+            // Si es domingo (0), el próximo día hábil es lunes (+1 día)
+            else if (dayOfWeek === 0) {
+                date.setDate(date.getDate() + 1);
+            }
+            // Si es lunes a jueves (1-4), el próximo día hábil es mañana
+            else {
+                date.setDate(date.getDate() + 1);
+            }
+            
+            return date;
+        }
+        
+        function isDateInPast(dateToCheck, referenceDate) {
+            const check = new Date(dateToCheck);
+            const reference = new Date(referenceDate);
+            
+            // Comparar solo fechas (sin horas)
+            check.setHours(0, 0, 0, 0);
+            reference.setHours(0, 0, 0, 0);
+            
+            return check < reference;
+        }
+        
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+        
+        function formatDateForDisplay(date) {
+            const options = {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                timeZone: 'America/Argentina/Buenos_Aires'
+            };
+            
+            try {
+                return date.toLocaleDateString('es-AR', options);
+            } catch (error) {
+                // Fallback si falla la localización
+                const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+                const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                              'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                
+                return `${days[date.getDay()]} ${date.getDate()} de ${months[date.getMonth()]}`;
+            }
+        }
+        
+        function getBusinessHoursInfo() {
+            const argTime = getCurrentArgentinaDate();
+            const hour = argTime.getHours();
+            
+            if (hour >= 9 && hour < 18) {
+                return {
+                    isBusinessHours: true,
+                    message: 'Horario de atención (9:00 - 18:00 hs)'
+                };
+            } else {
+                const nextOpen = hour < 9 ? 'hoy a las 9:00' : 'mañana a las 9:00';
+                return {
+                    isBusinessHours: false,
+                    message: `Fuera de horario. Próxima atención: ${nextOpen}`
+                };
+            }
+        }
+        
+        // Request quote function with lead capture
+        function requestQuote() {
+            const nombre = prompt('Para solicitar presupuesto\n\nIngresa tu nombre completo:');
+            if (!nombre || nombre.trim() === '') {
+                showNotification('Necesitamos tu nombre para contactarte', 'warning');
+                return;
+            }
+            
+            const organizacion = prompt('Nombre de tu organización:');
+            if (!organizacion || organizacion.trim() === '') {
+                showNotification('Necesitamos conocer tu organización', 'warning');
+                return;
+            }
+            
+            const email = prompt('Tu email de contacto:');
+            if (!email || !email.includes('@')) {
+                showNotification('Necesitamos un email válido para contactarte', 'error');
+                return;
+            }
+            
+            // Guardar lead en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Solicitud de Presupuesto',
+                nombre: nombre.trim(),
+                email: email.trim(),
+                organizacion: organizacion.trim(),
+                servicio: 'Presupuesto Personalizado',
+                fuente: 'Solicitud Presupuesto'
+            });
+            
+            const subject = 'Solicitud de Presupuesto - Thinking Out!';
+            const body = `Hola Emanuel,\n\nMe interesa conocer más sobre los servicios de Thinking Out! y solicitar un presupuesto personalizado.\n\nMis datos:\n• Nombre: ${nombre}\n• Organización: ${organizacion}\n• Email: ${email}\n\nMi organización: ${organizacion}\nSector: \nNecesidad principal: \nPresupuesto estimado: \n\nGracias,\n${nombre}`;
+            
+            window.location.href = `mailto:thinkingout.consultora@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            showNotification(`¡Perfecto ${nombre.split(' ')[0]}! Tu solicitud ha sido enviada.`, 'success');
+        }
+        
+        // Download resource function with lead capture
+        function downloadResource(type, fileName) {
+            const nombre = prompt(`Para descargar "${fileName}"\n\nIngresa tu nombre completo:`);
+            if (!nombre || nombre.trim() === '') {
+                showNotification('Necesitamos tu nombre para enviarte el recurso', 'warning');
+                return;
+            }
+            
+            const organizacion = prompt('Nombre de tu organización:');
+            if (!organizacion || organizacion.trim() === '') {
+                showNotification('Necesitamos conocer tu organización', 'warning');
+                return;
+            }
+            
+            const email = prompt('Tu email (para enviarte el recurso):');
+            if (!email || !email.includes('@')) {
+                showNotification('Necesitamos un email válido para enviarte el recurso', 'error');
+                return;
+            }
+            
+            // Guardar lead en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Descarga de Recurso',
+                nombre: nombre.trim(),
+                email: email.trim(),
+                organizacion: organizacion.trim(),
+                servicio: fileName,
+                fuente: `Recurso - ${type}`
+            });
+            
+            // Enviar email con datos
+            const subject = `Solicitud de Recurso: ${fileName}`;
+            const body = `Hola Emanuel,\n\nSolicito el recurso: ${fileName}\n\nMis datos:\n• Nombre: ${nombre}\n• Organización: ${organizacion}\n• Email: ${email}\n\nPor favor envía el recurso a mi email.\n\nGracias,\n${nombre}`;
+            
+            window.location.href = `mailto:thinkingout.consultora@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            showNotification(`¡Perfecto ${nombre.split(' ')[0]}! Tu solicitud ha sido enviada.`, 'success');
+        }
+        
+        // Newsletter subscription with lead capture
+        function subscribeNewsletter() {
+            const email = prompt('Suscríbete al Newsletter\n\nIngresa tu email:');
+            if (!email || !email.includes('@')) {
+                showNotification('Necesitamos un email válido para suscribirte', 'error');
+                return;
+            }
+            
+            const nombre = prompt('Tu nombre (opcional):') || 'Newsletter Subscriber';
+            const organizacion = prompt('Tu organización (opcional):') || '';
+            
+            // Guardar lead en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Newsletter',
+                nombre: nombre.trim(),
+                email: email.trim(),
+                organizacion: organizacion.trim(),
+                servicio: 'Suscripción Newsletter',
+                fuente: 'Newsletter Signup'
+            });
+            
+            showNotification(`¡Gracias ${nombre.split(' ')[0]}! Te has suscrito exitosamente.`, 'success');
+        }
+    </script>
+</body>
+</html>
