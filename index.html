@@ -399,6 +399,10 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
+            justify-items: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .feature-card {
@@ -422,18 +426,26 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2.5rem;
+            justify-items: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .feature-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
             padding: 2rem;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 20px;
             border: 1px solid rgba(120, 119, 198, 0.15);
             transition: all 0.3s ease;
+            width: 100%;
+            min-height: 200px;
+            aspect-ratio: 1.2/1;
         }
         
         .feature-item:hover {
@@ -1704,6 +1716,24 @@
             
             .company-features {
                 grid-template-columns: 1fr;
+                justify-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+            
+            .feature-item {
+                max-width: 100%;
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .feature-card {
+                max-width: 100%;
+                width: 95%;
+                margin: 0 auto;
             }
             
             .social-links {
@@ -1715,6 +1745,41 @@
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
+            }
+        }
+        
+        /* Desktop optimizations */
+        @media (min-width: 1200px) {
+            .company-features {
+                max-width: 1000px;
+                gap: 3rem;
+            }
+            
+            .features-grid {
+                max-width: 1100px;
+                gap: 3rem;
+            }
+            
+            .feature-item {
+                min-height: 220px;
+                max-width: 400px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .company-features {
+                max-width: 900px;
+                gap: 2.5rem;
+            }
+            
+            .features-grid {
+                max-width: 950px;
+                gap: 2.5rem;
+            }
+            
+            .feature-item {
+                min-height: 200px;
+                max-width: 380px;
             }
         }
     </style>
