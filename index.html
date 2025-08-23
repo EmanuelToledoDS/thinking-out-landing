@@ -2,13 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Thinking Out! - Consultora Digital de Datos | #DataSaturday</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            touch-action: manipulation;
         }
         
         body {
@@ -1027,13 +1028,33 @@
         }
         
         .service-price-unified {
-            background: rgba(0, 0, 0, 0.2);
-            color: #000000;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #ffffff;
             font-weight: 800;
             font-size: 1.2rem;
             padding: 1.5rem;
             border-radius: 15px;
             display: inline-block;
+            box-shadow: 0 10px 30px rgba(120, 119, 198, 0.4);
+        }
+        
+        .service-price-unified.clickable-btn {
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .service-price-unified.clickable-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(120, 119, 198, 0.6);
+        }
+        
+        .service-price-unified.clickable-btn:active {
+            transform: translateY(-1px);
         }
         
         /* Promotion Banner Centered */
@@ -1077,6 +1098,312 @@
             background: #7877c6;
             color: #000;
             transform: translateY(-3px);
+        }
+        
+        .custom-quote-cta {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .custom-quote-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #fff;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(120, 119, 198, 0.4);
+        }
+        
+        .custom-quote-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(120, 119, 198, 0.6);
+        }
+        
+        .quote-icon {
+            font-size: 1.5rem;
+        }
+        
+        .btn-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        .btn-content strong {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .btn-content small {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Quote Modal Styles */
+        .quote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quote-modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .quote-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .quote-close-btn:hover {
+            background: rgba(120, 119, 198, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .quote-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quote-header h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote-header p {
+            color: #7877c6;
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .quote-input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quote-input-group label {
+            display: block;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .quote-input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .quote-input-group input:focus {
+            outline: none;
+            border-color: #7877c6;
+            box-shadow: 0 0 0 3px rgba(120, 119, 198, 0.1);
+        }
+        
+        .quote-input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .quote-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .quote-btn-primary {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(120, 119, 198, 0.3);
+        }
+        
+        .quote-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(120, 119, 198, 0.4);
+        }
+        
+        .quote-btn-secondary {
+            background: transparent;
+            color: #7877c6;
+            border: 2px solid #7877c6;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quote-btn-secondary:hover {
+            background: #7877c6;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        
+        /* Smart Calendar Styles */
+        .smart-calendar-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 650px;
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-header h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .calendar-header p {
+            color: #7877c6;
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .business-days {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .business-day-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .business-day-btn:hover {
+            background: rgba(120, 119, 198, 0.2);
+            border-color: #7877c6;
+            transform: translateY(-2px);
+        }
+        
+        .business-day-btn.selected {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(120, 119, 198, 0.4);
+        }
+        
+        .day-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: capitalize;
+            margin-bottom: 0.3rem;
+        }
+        
+        .day-date {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .time-slots {
+            border-top: 1px solid rgba(120, 119, 198, 0.2);
+            padding-top: 1.5rem;
+        }
+        
+        .time-slots h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .time-slot-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin: 0.5rem 0;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .time-slot-btn:hover {
+            background: linear-gradient(135deg, #7877c6, #ff77c6);
+            border-color: transparent;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(120, 119, 198, 0.3);
         }
         
         /* Calendar Modal Styles */
@@ -1527,18 +1854,40 @@
             text-align: center;
         }
         
-        /* Mobile Responsiveness */
+        /* Mobile Responsiveness - ARREGLO DEFINITIVO */
         @media (max-width: 768px) {
-            body {
+            html, body {
                 overflow-y: auto !important;
+                overflow-x: hidden !important;
                 -webkit-overflow-scrolling: touch;
                 height: auto !important;
-                min-height: 100vh;
+                min-height: 100vh !important;
+                position: relative !important;
+                scroll-behavior: smooth;
             }
             
             .main-content {
-                overflow-y: visible;
-                height: auto;
+                overflow-y: visible !important;
+                overflow-x: hidden !important;
+                height: auto !important;
+                position: relative !important;
+            }
+            
+            .bg-animation {
+                position: fixed !important;
+                pointer-events: none !important;
+                z-index: -1 !important;
+            }
+            
+            /* Asegurar que todo sea scrolleable */
+            section, .section, .container {
+                position: relative !important;
+                z-index: 1 !important;
+            }
+            
+            /* Forzar altura mínima para scroll */
+            .main-content {
+                min-height: 200vh !important;
             }
             
             .notification {
@@ -1751,6 +2100,58 @@
                 max-width: 100%;
                 width: 95%;
                 margin: 0 auto;
+            }
+            
+            .custom-quote-btn {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .btn-content {
+                align-items: center;
+                text-align: center;
+            }
+            
+            .quote-icon {
+                font-size: 1.3rem;
+            }
+            
+            .quote-modal-content {
+                width: 95%;
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .quote-actions {
+                gap: 0.8rem;
+            }
+            
+            .quote-btn-primary,
+            .quote-btn-secondary {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .smart-calendar-content {
+                width: 95%;
+                max-width: 600px;
+                padding: 2rem;
+            }
+            
+            .business-day-btn {
+                width: 100%;
+                margin: 0.3rem 0;
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .time-slot-btn {
+                width: 100%;
+                margin: 0.3rem 0;
+                padding: 0.7rem;
+                font-size: 0.9rem;
             }
             
             .social-links {
@@ -2025,42 +2426,12 @@
                     </div>
                     
                     <div class="services-footer">
-                        <div class="service-price-unified">Presupuesto Personalizado según volumen y madurez de datos</div>
+                        <button onclick="openSimpleBooking()" class="service-price-unified clickable-btn">
+                            📅 Presupuesto Personalizado según volumen y madurez de datos
+                        </button>
                     </div>
                 </div>
                 
-                <!-- Promotion Banner After Services -->
-                <div class="promotion-banner-center">
-                    <h3>Oferta Especial - Solo Este Mes</h3>
-                    <p>Los primeros 5 diagnósticos del mes son <strong>BONIFICADOS</strong><br>
-                    Evaluación completa de madurez digital de tu organización sin costo</p>
-                    
-                    <div class="pre-cta-text">
-                        <p><strong>¿Listo para transformar tu organización?</strong><br>
-                        Agenda una consulta estratégica gratuita y descubre cómo podemos potenciar tu negocio</p>
-                    </div>
-                    
-                    <!-- Email Contact Section -->
-                    <div class="email-contact-section">
-                        <div class="contact-method">
-                            <div class="contact-icon">@</div>
-                            <div class="contact-info-inline">
-                                <span class="email-display">thinkingout.consultora@gmail.com</span>
-                                <span class="email-note">Todas las consultas por email • Respuesta en horario laboral</span>
-                            </div>
-                            <button onclick="copyToClipboard('thinkingout.consultora@gmail.com')" class="email-copy-btn">
-                                <span class="copy-icon">📋</span>
-                                Copiar
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="calendar-cta">
-                        <strong><a href="javascript:void(0)" onclick="openCalendar()" class="calendar-link">Agendar Diagnóstico BONIFICADO</a></strong>
-                    </div>
-                </div>
-                
-
             </div>
         </section>
 
@@ -2197,6 +2568,61 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Quote Modal -->
+    <div id="quote-modal" class="quote-modal">
+        <div class="quote-modal-content">
+            <button class="quote-close-btn" onclick="closeQuoteModal()">×</button>
+            
+            <div class="quote-header">
+                <h3>Presupuesto Personalizado</h3>
+                <p>Según volumen y madurez de datos</p>
+            </div>
+            
+            <form id="quote-form" onsubmit="scheduleCall(event)">
+                <div class="quote-input-group">
+                    <label for="quote-nombre">Nombre completo *</label>
+                    <input type="text" id="quote-nombre" required placeholder="Tu nombre">
+                </div>
+                
+                <div class="quote-input-group">
+                    <label for="quote-email">Email *</label>
+                    <input type="email" id="quote-email" required placeholder="tu@email.com">
+                </div>
+                
+                <div class="quote-input-group">
+                    <label for="quote-organizacion">Organización *</label>
+                    <input type="text" id="quote-organizacion" required placeholder="Nombre de tu empresa/organización">
+                </div>
+                
+                <div class="quote-actions">
+                    <button type="submit" class="quote-btn-primary">
+                        📅 Agendar Llamada para Presupuesto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Smart Calendar Modal -->
+    <div id="smart-calendar-modal" class="quote-modal">
+        <div class="smart-calendar-content">
+            <button class="quote-close-btn" onclick="closeSmartCalendar()">×</button>
+            
+            <div class="calendar-header">
+                <h3>Selecciona tu día y horario</h3>
+                <p>Próximos días hábiles disponibles (Lunes a Viernes)</p>
+            </div>
+            
+            <div id="business-days-container" class="business-days">
+                <!-- Días generados dinámicamente -->
+            </div>
+            
+            <div id="time-slots-container" class="time-slots" style="display: none;">
+                <!-- Horarios generados dinámicamente -->
+            </div>
+        </div>
+    </div>
 
     <script>
         // Google Sheets API configuration
@@ -3109,42 +3535,207 @@ Para más información, visite: www.thinkingout.com`;
             }
         }
         
-        // Request quote function with lead capture
+        // Request quote function with modal
         function requestQuote() {
-            const nombre = prompt('Para solicitar presupuesto\n\nIngresa tu nombre completo:');
-            if (!nombre || nombre.trim() === '') {
-                showNotification('Necesitamos tu nombre para contactarte', 'warning');
+            document.getElementById('quote-modal').style.display = 'flex';
+        }
+        
+        // Nueva función para abrir booking simple desde el botón principal
+        function openSimpleBooking() {
+            document.getElementById('quote-modal').style.display = 'flex';
+        }
+        
+        // Nueva función para calendario inteligente
+        function openSmartCalendar() {
+            document.getElementById('smart-calendar-modal').style.display = 'flex';
+            generateBusinessDays();
+        }
+        
+        function closeSmartCalendar() {
+            document.getElementById('smart-calendar-modal').style.display = 'none';
+        }
+        
+        // Generar próximos días hábiles
+        function generateBusinessDays() {
+            const calendarContainer = document.getElementById('business-days-container');
+            calendarContainer.innerHTML = '';
+            
+            const today = new Date();
+            const businessDays = [];
+            let currentDate = new Date(today);
+            currentDate.setDate(currentDate.getDate() + 1); // Empezar desde mañana
+            
+            // Generar próximos 10 días hábiles
+            while (businessDays.length < 10) {
+                const dayOfWeek = currentDate.getDay();
+                if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Lunes a Viernes
+                    businessDays.push(new Date(currentDate));
+                }
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            
+            // Crear botones para cada día
+            businessDays.forEach(date => {
+                const dayBtn = document.createElement('button');
+                dayBtn.className = 'business-day-btn';
+                
+                const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
+                const dayDate = date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+                
+                dayBtn.innerHTML = `
+                    <div class="day-name">${dayName}</div>
+                    <div class="day-date">${dayDate}</div>
+                `;
+                
+                dayBtn.onclick = () => selectBusinessDay(date);
+                calendarContainer.appendChild(dayBtn);
+            });
+        }
+        
+        // Seleccionar día y mostrar horarios
+        function selectBusinessDay(selectedDate) {
+            window.selectedDate = selectedDate;
+            
+            // Destacar día seleccionado
+            document.querySelectorAll('.business-day-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.closest('.business-day-btn').classList.add('selected');
+            
+            // Generar horarios disponibles
+            generateTimeSlots();
+        }
+        
+        // Generar horarios de 9:00 a 19:00 cada 2 horas
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots-container');
+            timeSlotsContainer.innerHTML = '<h4>Selecciona tu horario:</h4>';
+            
+            const timeSlots = ['09:00', '11:00', '13:00', '15:00', '17:00', '19:00'];
+            
+            timeSlots.forEach(time => {
+                const timeBtn = document.createElement('button');
+                timeBtn.className = 'time-slot-btn';
+                timeBtn.textContent = `${time} - ${addTwoHours(time)}`;
+                timeBtn.onclick = () => confirmBooking(time);
+                timeSlotsContainer.appendChild(timeBtn);
+            });
+            
+            timeSlotsContainer.style.display = 'block';
+        }
+        
+        // Sumar 2 horas a un horario
+        function addTwoHours(timeString) {
+            const [hours, minutes] = timeString.split(':').map(Number);
+            let newHours = hours + 2;
+            if (newHours > 23) newHours = 23;
+            return `${newHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }
+        
+        // Confirmar reserva
+        function confirmBooking(startTime) {
+            const endTime = addTwoHours(startTime);
+            const dateStr = window.selectedDate.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long'
+            });
+            
+            // Guardar en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Llamada Agendada',
+                nombre: window.bookingData.nombre,
+                email: window.bookingData.email,
+                organizacion: window.bookingData.organizacion,
+                fecha: dateStr,
+                horario: `${startTime} - ${endTime}`,
+                servicio: 'Presupuesto Personalizado',
+                fuente: 'Calendario Inteligente'
+            });
+            
+            closeSmartCalendar();
+            
+            // Mostrar mensaje de confirmación
+            const message = `¡Perfecto! El día ${dateStr} entre las ${startTime} y las ${endTime} horas serás llamado.`;
+            showNotification(message, 'success', 8000);
+            
+            // Limpiar datos temporales
+            delete window.bookingData;
+            delete window.selectedDate;
+        }
+        
+        function closeQuoteModal() {
+            document.getElementById('quote-modal').style.display = 'none';
+        }
+        
+        function submitQuoteRequest(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('quote-nombre').value.trim();
+            const email = document.getElementById('quote-email').value.trim();
+            const organizacion = document.getElementById('quote-organizacion').value.trim();
+            const telefono = document.getElementById('quote-telefono').value.trim();
+            
+            if (!nombre || !email || !organizacion) {
+                showNotification('Por favor completa todos los campos obligatorios', 'warning');
                 return;
             }
             
-            const organizacion = prompt('Nombre de tu organización:');
-            if (!organizacion || organizacion.trim() === '') {
-                showNotification('Necesitamos conocer tu organización', 'warning');
-                return;
-            }
-            
-            const email = prompt('Tu email de contacto:');
-            if (!email || !email.includes('@')) {
-                showNotification('Necesitamos un email válido para contactarte', 'error');
+            if (!email.includes('@')) {
+                showNotification('Ingresa un email válido', 'warning');
                 return;
             }
             
             // Guardar lead en Google Sheets
             saveLeadToSheet({
-                tipo: 'Solicitud de Presupuesto',
-                nombre: nombre.trim(),
-                email: email.trim(),
-                organizacion: organizacion.trim(),
-                servicio: 'Presupuesto Personalizado',
-                fuente: 'Solicitud Presupuesto'
+                tipo: 'Presupuesto Personalizado',
+                nombre: nombre,
+                email: email,
+                organizacion: organizacion,
+                telefono: telefono,
+                servicio: 'Presupuesto según volumen y madurez',
+                fuente: 'Modal Presupuesto'
             });
             
-            const subject = 'Solicitud de Presupuesto - Thinking Out!';
-            const body = `Hola Emanuel,\n\nMe interesa conocer más sobre los servicios de Thinking Out! y solicitar un presupuesto personalizado.\n\nMis datos:\n• Nombre: ${nombre}\n• Organización: ${organizacion}\n• Email: ${email}\n\nMi organización: ${organizacion}\nSector: \nNecesidad principal: \nPresupuesto estimado: \n\nGracias,\n${nombre}`;
+            showNotification(`✅ ¡Perfecto ${nombre.split(' ')[0]}! Tu solicitud ha sido enviada.`, 'success');
+            closeQuoteModal();
+            document.getElementById('quote-form').reset();
+        }
+        
+        function scheduleCall(event) {
+            event.preventDefault();
             
-            window.location.href = `mailto:thinkingout.consultora@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const nombre = document.getElementById('quote-nombre').value.trim();
+            const email = document.getElementById('quote-email').value.trim();
+            const organizacion = document.getElementById('quote-organizacion').value.trim();
             
-            showNotification(`¡Perfecto ${nombre.split(' ')[0]}! Tu solicitud ha sido enviada.`, 'success');
+            if (!nombre || !email || !organizacion) {
+                showNotification('Por favor completa todos los campos', 'warning');
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                showNotification('Ingresa un email válido', 'warning');
+                return;
+            }
+            
+            // Guardar datos temporalmente para el calendario
+            window.bookingData = {
+                nombre: nombre,
+                email: email,
+                organizacion: organizacion
+            };
+            
+            closeQuoteModal();
+            showNotification(`¡${nombre.split(' ')[0]}! Ahora selecciona tu día y horario.`, 'success');
+            
+            // Limpiar formulario
+            document.getElementById('quote-form').reset();
+            
+            // Abrir calendario inteligente inmediatamente
+            setTimeout(() => {
+                openSmartCalendar();
+            }, 800);
         }
         
         // Download resource function with lead capture
@@ -3208,6 +3799,45 @@ Para más información, visite: www.thinkingout.com`;
             });
             
             showNotification(`¡Gracias ${nombre.split(' ')[0]}! Te has suscrito exitosamente.`, 'success');
+        }
+        
+        // Show notification function
+        function showNotification(message, type = 'success', duration = 4000) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #4caf50, #45a049)' : type === 'warning' ? 'linear-gradient(135deg, #ff9800, #f57c00)' : 'linear-gradient(135deg, #2196f3, #1976d2)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 10001;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                max-width: 350px;
+                font-weight: 500;
+                line-height: 1.4;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Force reflow and show
+            notification.offsetHeight;
+            notification.style.transform = 'translateX(0)';
+            
+            // Auto remove after specified duration
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, duration);
         }
     </script>
 </body>
