@@ -18,6 +18,9 @@
             background: #000000;
             min-height: 100vh;
             overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
         }
         
         /* Animated background */
@@ -34,6 +37,7 @@
                 linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
             z-index: -1;
             animation: bgPulse 8s ease-in-out infinite;
+            pointer-events: none;
         }
         
         @keyframes bgPulse {
@@ -337,6 +341,7 @@
         .main-content {
             position: relative;
             z-index: 10;
+            min-height: 100vh;
         }
         
         .section {
@@ -1524,6 +1529,18 @@
         
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            body {
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch;
+                height: auto !important;
+                min-height: 100vh;
+            }
+            
+            .main-content {
+                overflow-y: visible;
+                height: auto;
+            }
+            
             .notification {
                 right: 10px;
                 left: 10px;
@@ -1887,7 +1904,7 @@
                     <div class="hero-stats">
                         <div class="hero-stat">
                             <span class="hero-stat-number">1</span>
-                            <div class="hero-stat-label">Año en el mercado</div>
+                            <div class="hero-stat-label">Año transformando con datos</div>
                         </div>
                         <div class="hero-stat">
                             <span class="hero-stat-number">100%</span>
