@@ -19,9 +19,10 @@
             background: #000000;
             min-height: 100vh;
             overflow-x: hidden;
-            overflow-y: auto;
+            overflow-y: scroll;
             -webkit-overflow-scrolling: touch;
             position: relative;
+            touch-action: pan-y;
         }
         
         /* Animated background */
@@ -1854,40 +1855,18 @@
             text-align: center;
         }
         
-        /* Mobile Responsiveness - ARREGLO DEFINITIVO */
+        /* Mobile Responsiveness - SIMPLE Y DIRECTO */
         @media (max-width: 768px) {
             html, body {
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                -webkit-overflow-scrolling: touch;
-                height: auto !important;
-                min-height: 100vh !important;
-                position: relative !important;
-                scroll-behavior: smooth;
-            }
-            
-            .main-content {
-                overflow-y: visible !important;
-                overflow-x: hidden !important;
+                overflow: scroll !important;
+                -webkit-overflow-scrolling: touch !important;
                 height: auto !important;
                 position: relative !important;
             }
             
             .bg-animation {
-                position: fixed !important;
-                pointer-events: none !important;
-                z-index: -1 !important;
-            }
-            
-            /* Asegurar que todo sea scrolleable */
-            section, .section, .container {
-                position: relative !important;
-                z-index: 1 !important;
-            }
-            
-            /* Forzar altura mínima para scroll */
-            .main-content {
-                min-height: 200vh !important;
+                position: absolute !important;
+                height: 200vh !important;
             }
             
             .notification {
@@ -2625,6 +2604,53 @@
     </div>
 
     <script>
+        // ARREGLO MÓVIL DEFINITIVO
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detectar móvil
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Forzar scroll en móvil
+                document.body.style.overflow = 'scroll';
+                document.body.style.overflowX = 'hidden';
+                document.body.style.overflowY = 'scroll';
+                document.body.style.WebkitOverflowScrolling = 'touch';
+                document.body.style.height = 'auto';
+                document.body.style.minHeight = '100vh';
+                
+                // Forzar en html también
+                document.documentElement.style.overflow = 'scroll';
+                document.documentElement.style.overflowX = 'hidden';
+                document.documentElement.style.overflowY = 'scroll';
+                document.documentElement.style.WebkitOverflowScrolling = 'touch';
+                
+                // Eliminar position fixed del background en móvil
+                const bgAnimation = document.querySelector('.bg-animation');
+                if (bgAnimation) {
+                    bgAnimation.style.position = 'absolute';
+                    bgAnimation.style.height = '200vh';
+                }
+                
+                console.log('Móvil detectado - Scroll activado');
+                
+                // Test táctil
+                document.addEventListener('touchstart', function(e) {
+                    console.log('Touch detectado:', e.touches.length);
+                }, { passive: true });
+                
+                // Prevenir zoom en double tap pero permitir scroll
+                document.addEventListener('touchend', function(e) {
+                    const now = (new Date()).getTime();
+                    if (now - lastTouchEnd <= 300) {
+                        e.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+                
+                let lastTouchEnd = 0;
+            }
+        });
+        
         // Google Sheets API configuration
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxJb2j-LGi5KPH3Wuq8UfgWvZ9NvCHvDbGdR8/exec';
 
