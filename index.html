@@ -1,8 +1,3 @@
-# Actualización para GitHub y Netlify
-
-Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor para móviles y asegurar que todos los elementos sean completamente responsivos. Aquí está la versión completa corregida:
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,10 +19,13 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             background: #000000;
             min-height: 100vh;
             overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
             position: relative;
+            touch-action: pan-y;
         }
         
-        /* Animated background - FIXED FOR MOBILE */
+        /* Animated background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -53,7 +51,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
-            width: 100%;
         }
         
         /* Modal Styles */
@@ -67,14 +64,12 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
         
         .modal-content {
             background: linear-gradient(135deg, #111111, #1a1a1a);
             margin: 5% auto;
-            padding: 2rem;
+            padding: 3rem;
             border: 1px solid rgba(120, 119, 198, 0.3);
             border-radius: 20px;
             width: 90%;
@@ -123,7 +118,7 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             border-radius: 10px;
             background: rgba(120, 119, 198, 0.05);
             color: #fff;
-            font-size: 16px; /* Prevent zoom on iOS */
+            font-size: 1rem;
             outline: none;
             transition: border-color 0.3s ease;
         }
@@ -148,7 +143,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             width: 100%;
             font-size: 1rem;
             transition: transform 0.3s ease;
-            min-height: 50px;
         }
         
         .modal-btn:hover {
@@ -176,7 +170,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
         
         .logo-container {
@@ -604,7 +597,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             letter-spacing: 0.5px;
             position: relative;
             z-index: 2;
-            min-height: 50px;
         }
         
         .download-btn:hover {
@@ -652,7 +644,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            min-height: 60px;
         }
         
         .quiz-btn:hover {
@@ -700,7 +691,7 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             padding: 18px 25px;
             border: none;
             border-radius: 50px;
-            font-size: 16px; /* Prevent zoom on iOS */
+            font-size: 1rem;
             background: transparent;
             color: #ffffff;
             outline: none;
@@ -721,7 +712,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            min-height: 60px;
         }
         
         .newsletter-form button:hover {
@@ -949,6 +939,18 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             line-height: 1.6;
         }
         
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .company-grid, .ceo-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+        }
+        
         /* Services Unified Card */
         .services-unified-card {
             background: linear-gradient(135deg, #7877c6, #ff77c6);
@@ -1045,7 +1047,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             display: block;
             width: 100%;
             text-align: center;
-            min-height: 60px;
         }
         
         .service-price-unified.clickable-btn:hover {
@@ -1166,8 +1167,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             z-index: 10000;
             align-items: center;
             justify-content: center;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
         
         .quote-modal-content {
@@ -1179,7 +1178,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             border: 1px solid rgba(120, 119, 198, 0.3);
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            margin: 5% auto;
         }
         
         .quote-close-btn {
@@ -1242,7 +1240,7 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             border: 1px solid rgba(120, 119, 198, 0.3);
             border-radius: 10px;
             color: #fff;
-            font-size: 16px; /* Prevent zoom on iOS */
+            font-size: 1rem;
             transition: all 0.3s ease;
             box-sizing: border-box;
         }
@@ -1276,7 +1274,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(120, 119, 198, 0.3);
-            min-height: 50px;
         }
         
         .quote-btn-primary:hover {
@@ -1295,7 +1292,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: 50px;
         }
         
         .quote-btn-secondary:hover {
@@ -1825,7 +1821,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
         .direct-contact {
             margin-top: 1rem;
             text-align: center;
-            width: 100%;
         }
         
         .direct-contact .email-contact {
@@ -1837,8 +1832,6 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             padding: 1rem;
             border-radius: 10px;
             margin: 1rem 0;
-            width: 100%;
-            box-sizing: border-box;
         }
         
         .direct-contact .email-icon {
@@ -1860,260 +1853,30 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             font-weight: 600;
             flex: 1;
             text-align: center;
-            word-break: break-all;
         }
         
-        /* ==================== */
-        /* RESPONSIVE DESIGN */
-        /* ==================== */
-        
-        /* Desktop optimizations */
-        @media (min-width: 1200px) {
-            .company-features {
-                max-width: 1000px;
-                gap: 3rem;
-            }
-            
-            .features-grid {
-                max-width: 1100px;
-                gap: 3rem;
-            }
-            
-            .feature-item {
-                min-height: 220px;
-                max-width: 400px;
-            }
-        }
-        
-        @media (min-width: 769px) and (max-width: 1199px) {
-            .company-features {
-                max-width: 900px;
-                gap: 2.5rem;
-            }
-            
-            .features-grid {
-                max-width: 950px;
-                gap: 2.5rem;
-            }
-            
-            .feature-item {
-                min-height: 200px;
-                max-width: 380px;
-            }
-        }
-        
-        /* Tablet Responsiveness */
-        @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            
-            .company-grid, .ceo-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 3rem;
-            }
-            
-            .hero-stats {
-                gap: 3rem;
-            }
-            
-            .services-unified-card {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-        
-        /* Mobile Responsiveness */
+        /* Mobile Responsiveness - SIMPLE Y DIRECTO */
         @media (max-width: 768px) {
             html, body {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
+                overflow: scroll !important;
+                -webkit-overflow-scrolling: touch !important;
+                height: auto !important;
+                position: relative !important;
             }
             
-            .container {
-                padding: 0 15px;
+            .bg-animation {
+                position: absolute !important;
+                height: 200vh !important;
             }
-            
-            .hero {
-                padding: 140px 0 80px;
+        }
+        
+        /* Móvil simplificado */
+        @media (max-width: 768px) {
+            body {
+                overflow: auto !important;
+                -webkit-overflow-scrolling: touch !important;
             }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-                line-height: 1.2;
-            }
-            
-            .hero .tagline {
-                font-size: 1.2rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1rem;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 2rem;
-                margin-top: 2rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .brand-name {
-                font-size: 1.5rem;
-            }
-            
-            .logo {
-                width: 50px;
-                height: 50px;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .section h2 {
-                font-size: 2.2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .company-content h3 {
-                font-size: 1.8rem;
-            }
-            
-            .company-content p {
-                font-size: 1rem;
-            }
-            
-            .company-features {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .feature-card {
-                padding: 1.5rem;
-            }
-            
-            .feature-card-unified {
-                padding: 2rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .feature-item {
-                padding: 1.5rem;
-                min-height: auto;
-            }
-            
-            .resources-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .resource-card {
-                padding: 2rem;
-            }
-            
-            .quiz-section {
-                padding: 2.5rem;
-            }
-            
-            .quiz-section h3 {
-                font-size: 1.8rem;
-            }
-            
-            .quiz-section p {
-                font-size: 1rem;
-            }
-            
-            .newsletter-section h3 {
-                font-size: 2rem;
-            }
-            
-            .newsletter-form {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .newsletter-form input,
-            .newsletter-form button {
-                width: 100%;
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .social-link {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-            
-            .ceo-card {
-                padding: 2.5rem;
-            }
-            
-            .ceo-name {
-                font-size: 2.2rem;
-            }
-            
-            .ceo-title {
-                font-size: 1.2rem;
-            }
-            
-            .services-unified-card {
-                grid-template-columns: 1fr;
-                padding: 2rem;
-            }
-            
-            .service-item {
-                padding: 1.2rem;
-            }
-            
-            .service-item h3 {
-                font-size: 1.2rem;
-            }
-            
-            .modal-content {
-                padding: 1.5rem;
-                margin: 10% auto;
-            }
-            
-            .quote-modal-content {
-                padding: 1.5rem;
-            }
-            
-            .smart-calendar-content {
-                padding: 1.5rem;
-            }
-            
-            .business-days {
-                grid-template-columns: 1fr;
-            }
-            
-            .calendar-container {
-                padding: 1.5rem;
-            }
-            
-            .calendar-grid {
-                gap: 3px;
-            }
-            
-            .calendar-day {
-                font-size: 0.9rem;
-                min-height: 40px;
-            }
+        }
             
             .notification {
                 right: 10px;
@@ -2154,80 +1917,105 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
                 text-align: center;
             }
             
-            .custom-quote-btn {
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 1.2rem 2rem;
-                font-size: 1rem;
-            }
-            
-            .btn-content {
-                align-items: center;
-                text-align: center;
-            }
-            
-            .quote-icon {
-                font-size: 1.3rem;
-            }
-        }
-        
-        /* Small Mobile Responsiveness */
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero .tagline {
-                font-size: 1.1rem;
-            }
-            
-            .section h2 {
-                font-size: 1.8rem;
-            }
-            
-            .section-header {
-                margin-bottom: 3rem;
-            }
-            
-            .ceo-card {
-                padding: 1.5rem;
-            }
-            
-            .ceo-name {
-                font-size: 1.8rem;
-            }
-            
-            .ceo-title {
-                font-size: 1rem;
-            }
-            
-            .ceo-card .ceo-bio {
-                font-size: 1rem;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 1.2rem;
-            }
-            
-            .modal h3 {
-                font-size: 1.3rem;
-            }
-            
-            .form-group input {
-                padding: 12px;
-            }
-            
             .calendar-container {
-                padding: 1rem;
+                width: 95%;
+                padding: 1.5rem 1rem;
+                margin: 2% auto;
+                max-height: 90vh;
+                overflow-y: auto;
             }
             
             .calendar-header h3 {
                 font-size: 1.2rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+            
+            .calendar-grid {
+                gap: 2px;
             }
             
             .calendar-day {
+                font-size: 0.85rem;
                 min-height: 35px;
+                border-radius: 6px;
+            }
+            
+            .calendar-day-header {
+                font-size: 0.8rem;
+                padding: 0.3rem;
+            }
+            
+            .calendar-day.available {
+                background: #7877c6;
+                border: 2px solid transparent;
+                transition: all 0.2s ease;
+            }
+            
+            .calendar-day.available:active {
+                background: #9b9ad6;
+                transform: scale(0.95);
+                border-color: #fff;
+            }
+            
+            .close-btn {
+                top: -5px;
+                right: -5px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
+            }
+            
+            .contact-info {
+                padding: 1rem;
+            }
+            
+            .contact-info p {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .copy-btn {
+                align-self: flex-end;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .message-to-copy textarea {
+                height: 100px;
+                font-size: 0.75rem;
+            }
+            
+            .fallback-btn {
+                padding: 1rem;
+                font-size: 1rem;
+                margin: 1rem 0;
+            }
+            
+            /* Mejores controles táctiles */
+            .calendar-day.available {
+                -webkit-tap-highlight-color: rgba(120, 119, 198, 0.3);
+                user-select: none;
+            }
+            
+            /* Evitar zoom en inputs en iOS */
+            input, textarea {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .calendar-container {
+                padding: 1rem 0.8rem;
+            }
+            
+            .calendar-header h3 {
+                font-size: 1.1rem;
+            }
+            
+            .calendar-day {
+                min-height: 32px;
                 font-size: 0.8rem;
             }
             
@@ -2247,19 +2035,9 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
         
         /* Landscape mobile optimization */
         @media (max-height: 600px) and (orientation: landscape) {
-            .hero {
-                padding: 120px 0 60px;
-                min-height: auto;
-            }
-            
-            .modal-content {
-                margin: 5% auto;
-                padding: 1rem;
-            }
-            
             .calendar-container {
-                max-height: 90vh;
-                margin: 2% auto;
+                max-height: 95vh;
+                margin: 1% auto;
             }
             
             .calendar-header {
@@ -2271,16 +2049,148 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
             }
         }
         
-        /* Prevent zoom on iOS input fields */
-        @media screen and (max-width: 768px) {
-            input, select, textarea {
-                font-size: 16px !important;
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .company-features {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+            
+            .feature-item {
+                max-width: 100%;
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .feature-card {
+                max-width: 100%;
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .custom-quote-btn {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .btn-content {
+                align-items: center;
+                text-align: center;
+            }
+            
+            .quote-icon {
+                font-size: 1.3rem;
+            }
+            
+            .quote-modal-content {
+                width: 95%;
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .quote-actions {
+                gap: 0.8rem;
+            }
+            
+            .quote-btn-primary,
+            .quote-btn-secondary {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .smart-calendar-content {
+                width: 95%;
+                max-width: 600px;
+                padding: 2rem;
+            }
+            
+            .business-day-btn {
+                width: 100%;
+                margin: 0.3rem 0;
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .time-slot-btn {
+                width: 100%;
+                margin: 0.3rem 0;
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-link {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        /* Desktop optimizations */
+        @media (min-width: 1200px) {
+            .company-features {
+                max-width: 1000px;
+                gap: 3rem;
+            }
+            
+            .features-grid {
+                max-width: 1100px;
+                gap: 3rem;
+            }
+            
+            .feature-item {
+                min-height: 220px;
+                max-width: 400px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .company-features {
+                max-width: 900px;
+                gap: 2.5rem;
+            }
+            
+            .features-grid {
+                max-width: 950px;
+                gap: 2.5rem;
+            }
+            
+            .feature-item {
+                min-height: 200px;
+                max-width: 380px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Contenido completo del cuerpo (igual que antes) -->
     <div class="bg-animation"></div>
 
     <!-- Modales -->
@@ -2622,4 +2532,1330 @@ Para que tu sitio funcione correctamente en Netlify, necesito optimizarlo mejor 
                         </p>
                         
                         <p class="ceo-bio">
-                            Mi experiencia combinando el sector público con la innovación tecnológica me permite
+                            Mi experiencia combinando el sector público con la innovación tecnológica me permite ofrecer soluciones que realmente funcionan en el contexto latinoamericano.
+                        </p>
+                        
+                        <p class="ceo-bio">
+                            Más allá de la consultoría, soy <strong>padre de 2 niños</strong> y estoy <strong>en pareja con Flor desde hace 14 años</strong>. Esta estabilidad familiar es la base que me permite innovar con confianza y construir soluciones que realmente impacten en las organizaciones y comunidades de Latinoamérica.
+                        </p>
+                        
+                        <div class="datasaturday-badge" style="margin-top: 2rem;">#DataSaturday Speaker</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Thinking Out!</div>
+                <div class="footer-tagline">La única consultora digital especializada en pequeños gobiernos latinoamericanos</div>
+                <div class="footer-description">Soluciones low tech & low cost totalmente personalizadas | 1 año transformando organizaciones</div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Quote Modal -->
+    <div id="quote-modal" class="quote-modal">
+        <div class="quote-modal-content">
+            <button class="quote-close-btn" onclick="closeQuoteModal()">×</button>
+            
+            <div class="quote-header">
+                <h3>Presupuesto Personalizado</h3>
+                <p>Según volumen y madurez de datos</p>
+            </div>
+            
+            <form id="quote-form" onsubmit="scheduleCall(event)">
+                <div class="quote-input-group">
+                    <label for="quote-nombre">Nombre completo *</label>
+                    <input type="text" id="quote-nombre" required placeholder="Tu nombre">
+                </div>
+                
+                <div class="quote-input-group">
+                    <label for="quote-email">Email *</label>
+                    <input type="email" id="quote-email" required placeholder="tu@email.com">
+                </div>
+                
+                <div class="quote-input-group">
+                    <label for="quote-organizacion">Organización *</label>
+                    <input type="text" id="quote-organizacion" required placeholder="Nombre de tu empresa/organización">
+                </div>
+                
+                <div class="quote-actions">
+                    <button type="submit" class="quote-btn-primary">
+                        📅 Agendar Llamada para Presupuesto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Smart Calendar Modal -->
+    <div id="smart-calendar-modal" class="quote-modal">
+        <div class="smart-calendar-content">
+            <button class="quote-close-btn" onclick="closeSmartCalendar()">×</button>
+            
+            <div class="calendar-header">
+                <h3>Selecciona tu día y horario</h3>
+                <p>Próximos días hábiles disponibles (Lunes a Viernes)</p>
+            </div>
+            
+            <div id="business-days-container" class="business-days">
+                <!-- Días generados dinámicamente -->
+            </div>
+            
+            <div id="time-slots-container" class="time-slots" style="display: none;">
+                <!-- Horarios generados dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arreglo móvil simple y directo
+        (function() {
+            // Aplicar inmediatamente
+            if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+                document.documentElement.style.overflow = 'auto';
+                document.documentElement.style.WebkitOverflowScrolling = 'touch';
+                document.body.style.overflow = 'auto';
+                document.body.style.WebkitOverflowScrolling = 'touch';
+                document.body.style.minHeight = '100vh';
+            }
+        })();
+        
+        // Al cargar la página
+        window.addEventListener('load', function() {
+            if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+                // Quitar position fixed del background
+                const bg = document.querySelector('.bg-animation');
+                if (bg) {
+                    bg.style.position = 'absolute';
+                    bg.style.height = '100%';
+                }
+                
+                // Asegurar scroll
+                document.body.scrollTop = 0;
+                window.scrollTo(0, 1);
+                setTimeout(() => window.scrollTo(0, 0), 100);
+            }
+        });
+        
+        // Google Sheets API configuration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxJb2j-LGi5KPH3Wuq8UfgWvZ9NvCHvDbGdR8/exec';
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Send data to Google Sheets and download file
+        async function sendDataAndDownload(data, downloadType) {
+            try {
+                // Send data to Google Sheets
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...data,
+                        type: downloadType,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                // Start download based on type
+                if (downloadType === 'pyme') {
+                    downloadPymeSheet(data);
+                } else if (downloadType === 'profesional') {
+                    downloadProfSheet(data);
+                } else if (downloadType === 'dashboard') {
+                    downloadDashboard(data);
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Error sending data:', error);
+                // Still allow download even if tracking fails
+                if (downloadType === 'pyme') {
+                    downloadPymeSheet(data);
+                } else if (downloadType === 'profesional') {
+                    downloadProfSheet(data);
+                } else if (downloadType === 'dashboard') {
+                    downloadDashboard(data);
+                }
+                return false;
+            }
+        }
+
+        // Download functions
+        function downloadPymeSheet(data) {
+            const csvContent = `Planilla Punto de Equilibrio PyMEs
+Descargada por: ${data.nombre}
+Organización: ${data.organizacion}
+Email: ${data.email}
+Fecha: ${new Date().toLocaleDateString()}
+
+INSTRUCCIONES:
+Esta planilla está diseñada para PyMEs que necesitan calcular su punto de equilibrio
+y analizar métricas de apalancamiento operativo.
+
+SECCIONES:
+1. Datos de la Empresa
+2. Costos Fijos Mensuales
+3. Costos Variables por Unidad
+4. Precio de Venta por Unidad
+5. Cálculo de Punto de Equilibrio
+6. Análisis de Apalancamiento
+
+FÓRMULAS PRINCIPALES:
+- Punto de Equilibrio (unidades) = Costos Fijos / (Precio - Costo Variable Unitario)
+- Punto de Equilibrio ($) = Punto de Equilibrio (unidades) × Precio
+- Apalancamiento Operativo = (Ventas - Costos Variables) / (Ventas - Costos Variables - Costos Fijos)
+
+Para más información, visite: www.thinkingout.com`;
+            
+            downloadFile(csvContent, 'Punto_Equilibrio_PyMEs.csv');
+        }
+
+        function downloadProfSheet(data) {
+            const csvContent = `Planilla Punto de Equilibrio Profesionales
+Descargada por: ${data.nombre}
+Organización: ${data.organizacion}
+Email: ${data.email}
+Fecha: ${new Date().toLocaleDateString()}
+
+INSTRUCCIONES:
+Esta planilla está adaptada para profesionales independientes y consultores
+que facturan por servicios o proyectos.
+
+SECCIONES:
+1. Datos del Profesional
+2. Costos Fijos Mensuales (oficina, software, seguros, etc.)
+3. Tiempo dedicado por proyecto/servicio
+4. Tarifa por hora/proyecto
+5. Cálculo de Punto de Equilibrio
+6. Proyección de ingresos necesarios
+
+MÉTRICAS ESPECIALES PARA PROFESIONALES:
+- Horas facturables mínimas por mes
+- Tarifa mínima por proyecto
+- Margen de seguridad recomendado
+
+Para más información, visite: www.thinkingout.com`;
+            
+            downloadFile(csvContent, 'Punto_Equilibrio_Profesionales.csv');
+        }
+
+        function downloadDashboard(data) {
+            const csvContent = `Dashboard KPI Sector Público
+Descargado por: ${data.nombre}
+Organización: ${data.organizacion}
+Email: ${data.email}
+Fecha: ${new Date().toLocaleDateString()}
+
+DASHBOARD INCLUYE 3 KPIs FUNDAMENTALES:
+
+1. EFICIENCIA OPERATIVA
+   - Tiempo promedio de resolución de trámites
+   - Porcentaje de procesos digitalizados
+   - Reducción de tiempos vs período anterior
+
+2. TRANSPARENCIA Y ACCESO A LA INFORMACIÓN
+   - Solicitudes de información atendidas en tiempo
+   - Publicaciones proactivas realizadas
+   - Índice de transparencia municipal
+
+3. GESTIÓN CIUDADANA
+   - Tiempo de respuesta a consultas ciudadanas
+   - Satisfacción ciudadana (encuestas)
+   - Participación en consultas públicas
+
+CONFIGURACIÓN RECOMENDADA:
+- Actualización mensual
+- Revisión trimestral de metas
+- Reportes ejecutivos automáticos
+
+Para más información, visite: www.thinkingout.com`;
+            
+            downloadFile(csvContent, 'Dashboard_KPI_Sector_Publico.csv');
+        }
+
+        function downloadFile(content, filename) {
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Form handlers
+        document.getElementById('form-pyme').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('nombre-pyme').value,
+                organizacion: document.getElementById('organizacion-pyme').value,
+                email: document.getElementById('email-pyme').value
+            };
+            
+            await sendDataAndDownload(data, 'pyme');
+            closeModal('modal-pyme');
+            alert('¡Descarga iniciada! Revisa tu carpeta de descargas.');
+            this.reset();
+        });
+
+        document.getElementById('form-prof').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('nombre-prof').value,
+                organizacion: document.getElementById('organizacion-prof').value,
+                email: document.getElementById('email-prof').value
+            };
+            
+            await sendDataAndDownload(data, 'profesional');
+            closeModal('modal-prof');
+            alert('¡Descarga iniciada! Revisa tu carpeta de descargas.');
+            this.reset();
+        });
+
+        document.getElementById('form-dashboard').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('nombre-dashboard').value,
+                organizacion: document.getElementById('organizacion-dashboard').value,
+                email: document.getElementById('email-dashboard').value
+            };
+            
+            await sendDataAndDownload(data, 'dashboard');
+            closeModal('modal-dashboard');
+            alert('¡Descarga iniciada! Revisa tu carpeta de descargas.');
+            this.reset();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`¡Gracias por suscribirte al Data Simple Newsletter! Te enviaremos contenido exclusivo a: ${email}`);
+            this.reset();
+        });
+
+        // Quiz function
+        function startQuiz() {
+            // El quiz está disponible como componente React separado
+            alert('¡Quiz de Madurez Digital disponible! Evalúa el nivel de gestión de datos de tu organización con 15 preguntas especializadas.');
+        }
+        
+        let userData = {};
+        
+        // Calendar function with validation
+        function openCalendar() {
+            try {
+                // Solicitar datos del usuario con validación
+                const nombreCompleto = prompt('Ingresa tu nombre completo:');
+                if (!nombreCompleto || nombreCompleto.trim() === '') {
+                    showNotification('Para continuar necesitamos tu nombre. ¡Inténtalo de nuevo!', 'warning');
+                    return;
+                }
+                
+                const telefono = prompt('Ingresa tu número de teléfono (con código de país si es necesario):');
+                if (!telefono || telefono.trim() === '') {
+                    showNotification('Para contactarte necesitamos tu teléfono. ¡Inténtalo de nuevo!', 'warning');
+                    return;
+                }
+                
+                // Validar y formatear datos con nueva función mejorada
+                const validation = validateAndFormatUserData(nombreCompleto, telefono);
+                
+                if (!validation.valid) {
+                    const errorMessage = validation.errors.join('\n• ');
+                    showNotification(`Por favor corrige los siguientes errores:\n• ${errorMessage}`, 'error');
+                    return;
+                }
+                
+                // Guardar datos validados y formateados
+                userData = validation.formattedData;
+                
+                // Guardar lead inicial en Google Sheets
+                saveLeadToSheet({
+                    tipo: 'Diagnóstico BONIFICADO',
+                    nombre: userData.nombre,
+                    telefono: userData.telefono,
+                    servicio: 'Diagnóstico de Madurez Digital',
+                    fuente: 'Calendario Landing Page'
+                });
+                
+                showNotification(`¡Perfecto ${validation.formattedData.nombre.split(' ')[0]}! Ahora selecciona tu fecha preferida.`, 'success');
+                
+                // Mostrar calendario
+                showCalendar();
+                
+            } catch (error) {
+                console.error('Error in openCalendar:', error);
+                showNotification('Ocurrió un error. Por favor intenta de nuevo o contacta directamente a thinkingout.consultora@gmail.com', 'error');
+            }
+        }
+        
+        function showCalendar() {
+            try {
+                // Verificar que no haya otro calendario abierto
+                const existingModal = document.getElementById('calendar-modal');
+                if (existingModal) {
+                    existingModal.remove();
+                }
+                
+                // Crear modal del calendario
+                const modal = document.createElement('div');
+                modal.id = 'calendar-modal';
+                modal.innerHTML = `
+                    <div class="calendar-backdrop" onclick="closeCalendar()">
+                        <div class="calendar-container" onclick="event.stopPropagation()">
+                            <div class="calendar-header">
+                                <h3>Selecciona el día para tu diagnóstico BONIFICADO</h3>
+                                <button onclick="closeCalendar()" class="close-btn">&times;</button>
+                            </div>
+                            <div id="calendar-content">Cargando calendario...</div>
+                            <div class="calendar-footer">
+                                <p><strong>Días disponibles:</strong> Solo lunes a viernes a partir del próximo día hábil</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Renderizar calendario después de que el modal esté en el DOM
+                setTimeout(() => {
+                    renderCalendar();
+                }, 100);
+                
+            } catch (error) {
+                console.error('Error showing calendar:', error);
+                showNotification('Error al abrir el calendario. Por favor contacta directamente a thinkingout.consultora@gmail.com', 'error');
+            }
+        }
+        
+        function renderCalendar() {
+            try {
+                // Usar zona horaria local argentina (UTC-3) como referencia de negocio
+                const now = getCurrentArgentinaDate();
+                const year = now.getFullYear();
+                const month = now.getMonth();
+                const today = now.getDate();
+                const currentDay = now.getDay(); // 0 = domingo, 1 = lunes...
+                
+                // Nombres de los meses
+                const monthNames = [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'October', 'Noviembre', 'Diciembre'
+                ];
+                
+                // Primer día del mes y último día del mes
+                const firstDay = new Date(year, month, 1).getDay();
+                const lastDay = new Date(year, month + 1, 0).getDate();
+                
+                // Calcular el próximo día hábil con lógica mejorada
+                const nextBusinessDay = getNextBusinessDay(now);
+                
+                // Si el próximo día hábil está en el siguiente mes, mostrarlo
+                let displayMonth = month;
+                let displayYear = year;
+                let businessDayOfMonth = nextBusinessDay.getDate();
+                
+                if (nextBusinessDay.getMonth() !== month) {
+                    // Si necesitamos mostrar el siguiente mes
+                    displayMonth = nextBusinessDay.getMonth();
+                    displayYear = nextBusinessDay.getFullYear();
+                    businessDayOfMonth = 1;
+                }
+                
+                let calendarHTML = `
+                    <div class="calendar-month">${monthNames[displayMonth]} ${displayYear}</div>
+                    <div class="timezone-info">Hora Argentina (UTC-3) - Hoy: ${formatDateForDisplay(now)}</div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Dom</div>
+                        <div class="calendar-day-header">Lun</div>
+                        <div class="calendar-day-header">Mar</div>
+                        <div class="calendar-day-header">Mié</div>
+                        <div class="calendar-day-header">Jue</div>
+                        <div class="calendar-day-header">Vie</div>
+                        <div class="calendar-day-header">Sáb</div>
+                `;
+                
+                // Usar las fechas del mes que se está mostrando
+                const displayFirstDay = new Date(displayYear, displayMonth, 1).getDay();
+                const displayLastDay = new Date(displayYear, displayMonth + 1, 0).getDate();
+                
+                // Espacios vacíos para los días antes del primer día del mes
+                for (let i = 0; i < displayFirstDay; i++) {
+                    calendarHTML += `<div class="calendar-day empty"></div>`;
+                }
+                
+                // Días del mes
+                for (let day = 1; day <= displayLastDay; day++) {
+                    const currentDate = new Date(displayYear, displayMonth, day);
+                    const dayOfWeek = currentDate.getDay();
+                    const isPast = isDateInPast(currentDate, now);
+                    const isBeforeBusinessDay = currentDate < nextBusinessDay;
+                    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6; // Domingo o sábado
+                    const isAvailable = !isPast && !isBeforeBusinessDay && !isWeekend;
+                    
+                    let dayClass = 'calendar-day';
+                    let clickHandler = '';
+                    
+                    if (isPast || isBeforeBusinessDay || isWeekend) {
+                        dayClass += ' disabled';
+                    } else {
+                        dayClass += ' available';
+                        clickHandler = `onclick="selectDate(${day}, ${displayMonth + 1}, ${displayYear})"`;
+                    }
+                    
+                    if (isSameDay(currentDate, now)) {
+                        dayClass += ' today';
+                    }
+                    
+                    calendarHTML += `<div class="${dayClass}" ${clickHandler}>${day}</div>`;
+                }
+                
+                calendarHTML += `</div>`;
+                
+                const calendarContent = document.getElementById('calendar-content');
+                if (calendarContent) {
+                    calendarContent.innerHTML = calendarHTML;
+                } else {
+                    throw new Error('Calendar content container not found');
+                }
+                
+            } catch (error) {
+                console.error('Error rendering calendar:', error);
+                showNotification('Error al cargar el calendario. Por favor intenta de nuevo.', 'error');
+            }
+        }
+        
+        function selectDate(day, month, year) {
+            try {
+                // Validar que los datos del usuario estén disponibles
+                if (!userData || !userData.nombre || !userData.telefono) {
+                    showNotification('Error: Datos de usuario no encontrados. Por favor intenta de nuevo.', 'error');
+                    closeCalendar();
+                    return;
+                }
+                
+                // Validar fecha
+                const selectedDate = new Date(year, month - 1, day);
+                const now = new Date();
+                
+                if (selectedDate < now.setHours(0,0,0,0)) {
+                    showNotification('No puedes seleccionar una fecha pasada.', 'warning');
+                    return;
+                }
+                
+                const dayOfWeek = selectedDate.getDay();
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    showNotification('Solo puedes seleccionar días de lunes a viernes.', 'warning');
+                    return;
+                }
+                
+                const formattedDate = `${day}/${month}/${year}`;
+                
+                // Confirmar la fecha seleccionada
+                const confirm = window.confirm(`¿Confirmas que quieres agendar tu diagnóstico BONIFICADO para el ${formattedDate}?`);
+                
+                if (confirm) {
+                    // Guardar lead confirmado con fecha en Google Sheets
+                    saveLeadToSheet({
+                        tipo: 'Diagnóstico CONFIRMADO',
+                        nombre: userData.nombre,
+                        telefono: userData.telefono,
+                        servicio: 'Diagnóstico de Madurez Digital',
+                        fechaSolicitada: formattedDate,
+                        fuente: 'Calendario - Confirmación'
+                    });
+                    
+                    // Enviar email con todos los datos
+                    sendAppointmentEmail(day, month, year);
+                    closeCalendar();
+                }
+                
+            } catch (error) {
+                console.error('Error selecting date:', error);
+                showNotification('Error al seleccionar la fecha. Por favor intenta de nuevo.', 'error');
+            }
+        }
+        
+        function sendAppointmentEmail(day, month, year) {
+            try {
+                const monthNames = [
+                    '', 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+                ];
+                
+                const selectedDate = `${day} de ${monthNames[month]} de ${year}`;
+                
+                const subject = 'Solicitud Diagnóstico BONIFICADO - Thinking Out!';
+                const body = `Hola Emanuel,\n\nSolicito agendar mi diagnóstico BONIFICADO de madurez digital.\n\nMis datos:\n• Nombre: ${userData.nombre}\n• Teléfono: ${userData.telefono}\n• Fecha solicitada: ${selectedDate}\n\nPor favor confirma la disponibilidad horaria para esta fecha.\n\nGracias,\n${userData.nombre}`;
+                
+                const mailtoLink = `mailto:thinkingout.consultora@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Detectar dispositivo móvil
+                const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                    // En móviles, mostrar alternativas si falla
+                    showEmailFallback(mailtoLink, userData.nombre, userData.telefono, selectedDate);
+                } else {
+                    // En desktop, intentar abrir cliente de email
+                    window.location.href = mailtoLink;
+                    
+                    // Mostrar confirmación después de un segundo
+                    setTimeout(() => {
+                        showNotification('Si no se abrió tu cliente de email, copia este email: thinkingout.consultora@gmail.com', 'info');
+                    }, 2000);
+                }
+                
+                showNotification('¡Solicitud enviada! Te contactaremos pronto.', 'success');
+                
+            } catch (error) {
+                console.error('Error sending email:', error);
+                showEmailFallback('', userData.nombre, userData.telefono, `${day}/${month}/${year}`);
+            }
+        }
+        
+        function closeCalendar() {
+            try {
+                const modal = document.getElementById('calendar-modal');
+                if (modal) {
+                    modal.remove();
+                }
+            } catch (error) {
+                console.error('Error closing calendar:', error);
+            }
+        }
+        
+        // Enhanced validation functions
+        function isValidName(name) {
+            if (!name || typeof name !== 'string') return false;
+            
+            const trimmedName = name.trim();
+            
+            // Verificar longitud mínima
+            if (trimmedName.length < 2) return false;
+            
+            // Verificar longitud máxima (evitar nombres extremadamente largos)
+            if (trimmedName.length > 100) return false;
+            
+            // Verificar que tenga al menos una letra
+            if (!/[a-zA-ZÀ-ſẠ-ỹ]/.test(trimmedName)) return false;
+            
+            // Permitir letras (incluye acentos), espacios, apóstrofes y guiones
+            const nameRegex = /^[a-zA-ZÀ-ſẠ-ỹ\s'.-]+$/;
+            if (!nameRegex.test(trimmedName)) return false;
+            
+            // Verificar que no sea solo espacios o caracteres especiales
+            if (/^[\s'.-]+$/.test(trimmedName)) return false;
+            
+            // Verificar que tenga al menos 2 letras (no solo una inicial)
+            const letterCount = (trimmedName.match(/[a-zA-ZÀ-ſẠ-ỹ]/g) || []).length;
+            if (letterCount < 2) return false;
+            
+            return true;
+        }
+        
+        function isValidPhone(phone) {
+            if (!phone || typeof phone !== 'string') return false;
+            
+            // Limpiar el teléfono de espacios, guiones, paréntesis
+            const cleanPhone = phone.replace(/[\s\-()._]/g, '');
+            
+            // Verificar longitud
+            if (cleanPhone.length < 8 || cleanPhone.length > 20) return false;
+            
+            // Patrones comunes de teléfonos internacionales
+            const phonePatterns = [
+                /^\+?[1-9]\d{7,19}$/, // Internacional general
+                /^\+54[0-9]{10,11}$/, // Argentina
+                /^\+1[0-9]{10}$/, // USA/Canadá
+                /^\+34[0-9]{9}$/, // España
+                /^\+52[0-9]{10}$/, // México
+                /^\+56[0-9]{8,9}$/, // Chile
+                /^\+57[0-9]{10}$/, // Colombia
+                /^\+51[0-9]{9}$/, // Perú
+                /^\+598[0-9]{8}$/, // Uruguay
+                /^[0-9]{8,15}$/ // Sin código de país
+            ];
+            
+            return phonePatterns.some(pattern => pattern.test(cleanPhone));
+        }
+        
+        function formatPhoneNumber(phone) {
+            if (!phone) return '';
+            
+            // Limpiar y formatear el teléfono
+            let cleanPhone = phone.replace(/[^\d+]/g, '');
+            
+            // Si no tiene código de país y parece ser argentino (11 dígitos), agregar +54
+            if (!/^\+/.test(cleanPhone) && cleanPhone.length === 11 && cleanPhone.startsWith('11')) {
+                cleanPhone = '+54' + cleanPhone;
+            }
+            
+            return cleanPhone;
+        }
+        
+        function validateAndFormatUserData(nombre, telefono) {
+            const errors = [];
+            
+            // Validar nombre
+            if (!isValidName(nombre)) {
+                if (!nombre || nombre.trim().length === 0) {
+                    errors.push('El nombre es obligatorio');
+                } else if (nombre.trim().length < 2) {
+                    errors.push('El nombre debe tener al menos 2 caracteres');
+                } else if (nombre.trim().length > 100) {
+                    errors.push('El nombre es demasiado largo');
+                } else if (!/[a-zA-ZÀ-ſẠ-ỹ]/.test(nombre)) {
+                    errors.push('El nombre debe contener letras');
+                } else {
+                    errors.push('El nombre contiene caracteres no válidos');
+                }
+            }
+            
+            // Validar teléfono
+            if (!isValidPhone(telefono)) {
+                if (!telefono || telefono.trim().length === 0) {
+                    errors.push('El teléfono es obligatorio');
+                } else if (telefono.replace(/[^\d]/g, '').length < 8) {
+                    errors.push('El teléfono debe tener al menos 8 dígitos');
+                } else if (telefono.replace(/[^\d]/g, '').length > 20) {
+                    errors.push('El teléfono es demasiado largo');
+                } else {
+                    errors.push('Formato de teléfono inválido. Ej: +54 11 1234 5678');
+                }
+            }
+            
+            return {
+                valid: errors.length === 0,
+                errors: errors,
+                formattedData: {
+                    nombre: nombre ? nombre.trim() : '',
+                    telefono: formatPhoneNumber(telefono)
+                }
+            };
+        }
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-icon">${getNotificationIcon(type)}</span>
+                    <span class="notification-message">${message}</span>
+                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification && notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        function getNotificationIcon(type) {
+            switch(type) {
+                case 'success': return '✓';
+                case 'error': return '⚠';
+                case 'warning': return '⚠';
+                default: return 'ℹ';
+            }
+        }
+        
+        // Email fallback for mobile devices
+        function showEmailFallback(mailtoLink, nombre, telefono, fecha) {
+            const fallbackModal = document.createElement('div');
+            fallbackModal.id = 'email-fallback-modal';
+            fallbackModal.innerHTML = `
+                <div class="calendar-backdrop" onclick="document.getElementById('email-fallback-modal').remove()">
+                    <div class="calendar-container" onclick="event.stopPropagation()">
+                        <div class="calendar-header">
+                            <h3>¡Tu solicitud está lista!</h3>
+                            <button onclick="document.getElementById('email-fallback-modal').remove()" class="close-btn">&times;</button>
+                        </div>
+                        <div class="email-fallback-content">
+                            <p><strong>Opción 1:</strong> Hacer click para abrir tu app de email</p>
+                            <button onclick="window.location.href='${mailtoLink}'" class="fallback-btn primary">Abrir Email</button>
+                            
+                            <p><strong>Opción 2:</strong> Copia la información y envíala manualmente</p>
+                            <div class="contact-info">
+                                <p><strong>Email:</strong> <span id="copy-email">thinkingout.consultora@gmail.com</span> 
+                                <button onclick="copyToClipboard('thinkingout.consultora@gmail.com')" class="copy-btn">Copiar</button></p>
+                                
+                                <div class="message-to-copy">
+                                    <strong>Mensaje:</strong><br>
+                                    <textarea readonly id="message-text">Hola Emanuel,\n\nSolicito agendar mi diagnóstico BONIFICADO de madurez digital.\n\nMis datos:\n• Nombre: ${nombre}\n• Teléfono: ${telefono}\n• Fecha solicitada: ${fecha}\n\nPor favor confirma la disponibilidad horaria.\n\nGracias,\n${nombre}</textarea>
+                                    <button onclick="copyToClipboard(document.getElementById('message-text').value)" class="copy-btn">Copiar Mensaje</button>
+                                </div>
+                            </div>
+                            
+                            <p><strong>Opción 3:</strong> Llamar directamente (si tienes el teléfono)</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(fallbackModal);
+        }
+        
+        function copyToClipboard(text) {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showNotification('¡Copiado!', 'success');
+                    }).catch(() => {
+                        fallbackCopyToClipboard(text);
+                    });
+                } else {
+                    fallbackCopyToClipboard(text);
+                }
+            } catch (error) {
+                console.error('Copy error:', error);
+                showNotification('No se pudo copiar. Selecciónalo manualmente.', 'warning');
+            }
+        }
+        
+        function fallbackCopyToClipboard(text) {
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    showNotification('¡Copiado!', 'success');
+                } else {
+                    throw new Error('Copy command failed');
+                }
+            } catch (error) {
+                console.error('Fallback copy failed:', error);
+                showNotification('No se pudo copiar automáticamente. Selecciónalo y copia manualmente (Ctrl+C).', 'warning');
+            }
+        }
+        
+        // Touch event optimization for mobile
+        function addTouchSupport() {
+            try {
+                // Detectar si es dispositivo táctil
+                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                
+                if (isTouchDevice) {
+                    // Agregar clase para identificar dispositivos táctiles
+                    document.body.classList.add('touch-device');
+                    
+                    // Mejorar rendimiento de scroll en móviles
+                    document.addEventListener('touchmove', function(e) {
+                        // Permitir scroll solo en elementos scrolleables
+                        if (e.target.closest('.calendar-container') || e.target.closest('.message-to-copy textarea')) {
+                            return;
+                        }
+                        e.preventDefault();
+                    }, { passive: false });
+                }
+            } catch (error) {
+                console.error('Error adding touch support:', error);
+            }
+        }
+        
+        // Inicializar soporte táctil cuando carga la página
+        document.addEventListener('DOMContentLoaded', addTouchSupport);
+        
+        // Si el DOM ya está cargado
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addTouchSupport);
+        } else {
+            addTouchSupport();
+        }
+        
+        // Google Sheets Integration
+        // Google Apps Script URL - CONFIGURADO
+        const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzE21Y1Jo4IBZwf4mLBqaWNvZMwGgsk7rrbfhs4xJUvF_8xEA4RajMZO7kJCRbZoxskEQ/exec';
+        
+        async function saveLeadToSheet(leadData) {
+            try {
+                const response = await fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        timestamp: new Date().toISOString(),
+                        tipo: leadData.tipo,
+                        nombre: leadData.nombre,
+                        email: leadData.email || '',
+                        telefono: leadData.telefono || '',
+                        organizacion: leadData.organizacion || '',
+                        servicio: leadData.servicio || '',
+                        fechaSolicitada: leadData.fechaSolicitada || '',
+                        fuente: leadData.fuente || 'Landing Page',
+                        navegador: navigator.userAgent,
+                        ip: 'Auto-detectada'
+                    })
+                });
+                
+                console.log('Lead guardado en Google Sheets');
+                return true;
+            } catch (error) {
+                console.error('Error guardando lead:', error);
+                // No mostrar error al usuario, solo loguear
+                return false;
+            }
+        }
+        
+        // Timezone and date handling functions
+        function getCurrentArgentinaDate() {
+            try {
+                // Obtener fecha en zona horaria de Argentina (UTC-3)
+                const now = new Date();
+                const argentinaOffset = -3; // UTC-3
+                const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+                const argentinaTime = new Date(utc + (argentinaOffset * 3600000));
+                return argentinaTime;
+            } catch (error) {
+                console.warn('Error getting Argentina time, using local time:', error);
+                return new Date();
+            }
+        }
+        
+        function getNextBusinessDay(currentDate) {
+            const date = new Date(currentDate);
+            const dayOfWeek = date.getDay();
+            
+            // Si es viernes (5), el próximo día hábil es lunes (+3 días)
+            if (dayOfWeek === 5) {
+                date.setDate(date.getDate() + 3);
+            }
+            // Si es sábado (6), el próximo día hábil es lunes (+2 días)
+            else if (dayOfWeek === 6) {
+                date.setDate(date.getDate() + 2);
+            }
+            // Si es domingo (0), el próximo día hábil es lunes (+1 día)
+            else if (dayOfWeek === 0) {
+                date.setDate(date.getDate() + 1);
+            }
+            // Si es lunes a jueves (1-4), el próximo día hábil es mañana
+            else {
+                date.setDate(date.getDate() + 1);
+            }
+            
+            return date;
+        }
+        
+        function isDateInPast(dateToCheck, referenceDate) {
+            const check = new Date(dateToCheck);
+            const reference = new Date(referenceDate);
+            
+            // Comparar solo fechas (sin horas)
+            check.setHours(0, 0, 0, 0);
+            reference.setHours(0, 0, 0, 0);
+            
+            return check < reference;
+        }
+        
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+        
+        function formatDateForDisplay(date) {
+            const options = {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                timeZone: 'America/Argentina/Buenos_Aires'
+            };
+            
+            try {
+                return date.toLocaleDateString('es-AR', options);
+            } catch (error) {
+                // Fallback si falla la localización
+                const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+                const months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                              'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                
+                return `${days[date.getDay()]} ${date.getDate()} de ${months[date.getMonth()]}`;
+            }
+        }
+        
+        function getBusinessHoursInfo() {
+            const argTime = getCurrentArgentinaDate();
+            const hour = argTime.getHours();
+            
+            if (hour >= 9 && hour < 18) {
+                return {
+                    isBusinessHours: true,
+                    message: 'Horario de atención (9:00 - 18:00 hs)'
+                };
+            } else {
+                const nextOpen = hour < 9 ? 'hoy a las 9:00' : 'mañana a las 9:00';
+                return {
+                    isBusinessHours: false,
+                    message: `Fuera de horario. Próxima atención: ${nextOpen}`
+                };
+            }
+        }
+        
+        // Request quote function with modal
+        function requestQuote() {
+            document.getElementById('quote-modal').style.display = 'flex';
+        }
+        
+        // Nueva función para abrir booking simple desde el botón principal
+        function openSimpleBooking() {
+            document.getElementById('quote-modal').style.display = 'flex';
+        }
+        
+        // Nueva función para calendario inteligente
+        function openSmartCalendar() {
+            document.getElementById('smart-calendar-modal').style.display = 'flex';
+            generateBusinessDays();
+        }
+        
+        function closeSmartCalendar() {
+            document.getElementById('smart-calendar-modal').style.display = 'none';
+        }
+        
+        // Generar próximos días hábiles
+        function generateBusinessDays() {
+            const calendarContainer = document.getElementById('business-days-container');
+            calendarContainer.innerHTML = '';
+            
+            const today = new Date();
+            const businessDays = [];
+            let currentDate = new Date(today);
+            currentDate.setDate(currentDate.getDate() + 1); // Empezar desde mañana
+            
+            // Generar próximos 10 días hábiles
+            while (businessDays.length < 10) {
+                const dayOfWeek = currentDate.getDay();
+                if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Lunes a Viernes
+                    businessDays.push(new Date(currentDate));
+                }
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            
+            // Crear botones para cada día
+            businessDays.forEach(date => {
+                const dayBtn = document.createElement('button');
+                dayBtn.className = 'business-day-btn';
+                
+                const dayName = date.toLocaleDateString('es-ES', { weekday: 'long' });
+                const dayDate = date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+                
+                dayBtn.innerHTML = `
+                    <div class="day-name">${dayName}</div>
+                    <div class="day-date">${dayDate}</div>
+                `;
+                
+                dayBtn.onclick = () => selectBusinessDay(date);
+                calendarContainer.appendChild(dayBtn);
+            });
+        }
+        
+        // Seleccionar día y mostrar horarios
+        function selectBusinessDay(selectedDate) {
+            window.selectedDate = selectedDate;
+            
+            // Destacar día seleccionado
+            document.querySelectorAll('.business-day-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.closest('.business-day-btn').classList.add('selected');
+            
+            // Generar horarios disponibles
+            generateTimeSlots();
+        }
+        
+        // Generar horarios de 9:00 a 19:00 cada 2 horas
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('time-slots-container');
+            timeSlotsContainer.innerHTML = '<h4>Selecciona tu horario:</h4>';
+            
+            const timeSlots = ['09:00', '11:00', '13:00', '15:00', '17:00', '19:00'];
+            
+            timeSlots.forEach(time => {
+                const timeBtn = document.createElement('button');
+                timeBtn.className = 'time-slot-btn';
+                timeBtn.textContent = `${time} - ${addTwoHours(time)}`;
+                timeBtn.onclick = () => confirmBooking(time);
+                timeSlotsContainer.appendChild(timeBtn);
+            });
+            
+            timeSlotsContainer.style.display = 'block';
+        }
+        
+        // Sumar 2 horas a un horario
+        function addTwoHours(timeString) {
+            const [hours, minutes] = timeString.split(':').map(Number);
+            let newHours = hours + 2;
+            if (newHours > 23) newHours = 23;
+            return `${newHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }
+        
+        // Confirmar reserva
+        function confirmBooking(startTime) {
+            const endTime = addTwoHours(startTime);
+            const dateStr = window.selectedDate.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long'
+            });
+            
+            // Guardar en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Llamada Agendada',
+                nombre: window.bookingData.nombre,
+                email: window.bookingData.email,
+                organizacion: window.bookingData.organizacion,
+                fecha: dateStr,
+                horario: `${startTime} - ${endTime}`,
+                servicio: 'Presupuesto Personalizado',
+                fuente: 'Calendario Inteligente'
+            });
+            
+            closeSmartCalendar();
+            
+            // Mostrar mensaje de confirmación
+            const message = `¡Perfecto! El día ${dateStr} entre las ${startTime} y las ${endTime} horas serás llamado.`;
+            showNotification(message, 'success', 8000);
+            
+            // Limpiar datos temporales
+            delete window.bookingData;
+            delete window.selectedDate;
+        }
+        
+        function closeQuoteModal() {
+            document.getElementById('quote-modal').style.display = 'none';
+        }
+        
+        function submitQuoteRequest(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('quote-nombre').value.trim();
+            const email = document.getElementById('quote-email').value.trim();
+            const organizacion = document.getElementById('quote-organizacion').value.trim();
+            const telefono = document.getElementById('quote-telefono').value.trim();
+            
+            if (!nombre || !email || !organizacion) {
+                showNotification('Por favor completa todos los campos obligatorios', 'warning');
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                showNotification('Ingresa un email válido', 'warning');
+                return;
+            }
+            
+            // Guardar lead en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Presupuesto Personalizado',
+                nombre: nombre,
+                email: email,
+                organizacion: organizacion,
+                telefono: telefono,
+                servicio: 'Presupuesto según volumen y madurez',
+                fuente: 'Modal Presupuesto'
+            });
+            
+            showNotification(`✅ ¡Perfecto ${nombre.split(' ')[0]}! Tu solicitud ha sido enviada.`, 'success');
+            closeQuoteModal();
+            document.getElementById('quote-form').reset();
+        }
+        
+        function scheduleCall(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('quote-nombre').value.trim();
+            const email = document.getElementById('quote-email').value.trim();
+            const organizacion = document.getElementById('quote-organizacion').value.trim();
+            
+            if (!nombre || !email || !organizacion) {
+                showNotification('Por favor completa todos los campos', 'warning');
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                showNotification('Ingresa un email válido', 'warning');
+                return;
+            }
+            
+            // Guardar datos temporalmente para el calendario
+            window.bookingData = {
+                nombre: nombre,
+                email: email,
+                organizacion: organizacion
+            };
+            
+            closeQuoteModal();
+            showNotification(`¡${nombre.split(' ')[0]}! Ahora selecciona tu día y horario.`, 'success');
+            
+            // Limpiar formulario
+            document.getElementById('quote-form').reset();
+            
+            // Abrir calendario inteligente inmediatamente
+            setTimeout(() => {
+                openSmartCalendar();
+            }, 800);
+        }
+        
+        // Download resource function with lead capture
+        function downloadResource(type, fileName) {
+            const nombre = prompt(`Para descargar "${fileName}"\n\nIngresa tu nombre completo:`);
+            if (!nombre || nombre.trim() === '') {
+                showNotification('Necesitamos tu nombre para enviarte el recurso', 'warning');
+                return;
+            }
+            
+            const organizacion = prompt('Nombre de tu organización:');
+            if (!organizacion || organizacion.trim() === '') {
+                showNotification('Necesitamos conocer tu organización', 'warning');
+                return;
+            }
+            
+            const email = prompt('Tu email (para enviarte el recurso):');
+            if (!email || !email.includes('@')) {
+                showNotification('Necesitamos un email válido para enviarte el recurso', 'error');
+                return;
+            }
+            
+            // Guardar lead en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Descarga de Recurso',
+                nombre: nombre.trim(),
+                email: email.trim(),
+                organizacion: organizacion.trim(),
+                servicio: fileName,
+                fuente: `Recurso - ${type}`
+            });
+            
+            // Enviar email con datos
+            const subject = `Solicitud de Recurso: ${fileName}`;
+            const body = `Hola Emanuel,\n\nSolicito el recurso: ${fileName}\n\nMis datos:\n• Nombre: ${nombre}\n• Organización: ${organizacion}\n• Email: ${email}\n\nPor favor envía el recurso a mi email.\n\nGracias,\n${nombre}`;
+            
+            window.location.href = `mailto:thinkingout.consultora@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            showNotification(`¡Perfecto ${nombre.split(' ')[0]}! Tu solicitud ha sido enviada.`, 'success');
+        }
+        
+        // Newsletter subscription with lead capture
+        function subscribeNewsletter() {
+            const email = prompt('Suscríbete al Newsletter\n\nIngresa tu email:');
+            if (!email || !email.includes('@')) {
+                showNotification('Necesitamos un email válido para suscribirte', 'error');
+                return;
+            }
+            
+            const nombre = prompt('Tu nombre (opcional):') || 'Newsletter Subscriber';
+            const organizacion = prompt('Tu organización (opcional):') || '';
+            
+            // Guardar lead en Google Sheets
+            saveLeadToSheet({
+                tipo: 'Newsletter',
+                nombre: nombre.trim(),
+                email: email.trim(),
+                organizacion: organizacion.trim(),
+                servicio: 'Suscripción Newsletter',
+                fuente: 'Newsletter Signup'
+            });
+            
+            showNotification(`¡Gracias ${nombre.split(' ')[0]}! Te has suscrito exitosamente.`, 'success');
+        }
+        
+        // Show notification function
+        function showNotification(message, type = 'success', duration = 4000) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #4caf50, #45a049)' : type === 'warning' ? 'linear-gradient(135deg, #ff9800, #f57c00)' : 'linear-gradient(135deg, #2196f3, #1976d2)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 10001;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                max-width: 350px;
+                font-weight: 500;
+                line-height: 1.4;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Force reflow and show
+            notification.offsetHeight;
+            notification.style.transform = 'translateX(0)';
+            
+            // Auto remove after specified duration
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, duration);
+        }
+    </script>
+</body>
+</html>
