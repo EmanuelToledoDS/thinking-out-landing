@@ -1870,24 +1870,11 @@
             }
         }
         
-        /* FORZAR SCROLL EN TODAS LAS PANTALLAS PEQUEÑAS */
-        @media (max-width: 768px), (pointer: coarse) {
-            html {
-                overflow-y: scroll !important;
-                -webkit-overflow-scrolling: touch !important;
-            }
-            
+        /* Móvil simplificado */
+        @media (max-width: 768px) {
             body {
-                overflow-y: scroll !important;
+                overflow: auto !important;
                 -webkit-overflow-scrolling: touch !important;
-                min-height: 100vh !important;
-                touch-action: pan-y !important;
-            }
-            
-            .main-content {
-                overflow: visible !important;
-                position: relative !important;
-                z-index: 1 !important;
             }
         }
             
@@ -2626,93 +2613,33 @@
     </div>
 
     <script>
-        // ARREGLO MÓVIL ULTRA AGRESIVO - APLICAR SIEMPRE
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Página cargada - Aplicando arreglos móviles');
-            console.log('User Agent:', navigator.userAgent);
-            
-            // Detectar móvil
-            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isTouch = 'ontouchstart' in window;
-            const isSmallScreen = window.innerWidth <= 768;
-            
-            console.log('Es móvil:', isMobile);
-            console.log('Tiene touch:', isTouch);
-            console.log('Pantalla pequeña:', isSmallScreen);
-            
-            // APLICAR SIEMPRE EN PANTALLAS PEQUEÑAS
-            if (isMobile || isTouch || isSmallScreen) {
-                // Forzar scroll en móvil
-                document.body.style.overflow = 'scroll';
-                document.body.style.overflowX = 'hidden';
-                document.body.style.overflowY = 'scroll';
-                document.body.style.WebkitOverflowScrolling = 'touch';
-                document.body.style.height = 'auto';
-                document.body.style.minHeight = '100vh';
-                
-                // Forzar en html también
-                document.documentElement.style.overflow = 'scroll';
-                document.documentElement.style.overflowX = 'hidden';
-                document.documentElement.style.overflowY = 'scroll';
+        // Arreglo móvil simple y directo
+        (function() {
+            // Aplicar inmediatamente
+            if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+                document.documentElement.style.overflow = 'auto';
                 document.documentElement.style.WebkitOverflowScrolling = 'touch';
-                
-                // Eliminar position fixed del background en móvil
-                const bgAnimation = document.querySelector('.bg-animation');
-                if (bgAnimation) {
-                    bgAnimation.style.position = 'absolute';
-                    bgAnimation.style.height = '200vh';
+                document.body.style.overflow = 'auto';
+                document.body.style.WebkitOverflowScrolling = 'touch';
+                document.body.style.minHeight = '100vh';
+            }
+        })();
+        
+        // Al cargar la página
+        window.addEventListener('load', function() {
+            if (window.innerWidth <= 768 || 'ontouchstart' in window) {
+                // Quitar position fixed del background
+                const bg = document.querySelector('.bg-animation');
+                if (bg) {
+                    bg.style.position = 'absolute';
+                    bg.style.height = '100%';
                 }
                 
-                console.log('Móvil detectado - Scroll activado');
-                
-                // Test táctil
-                document.addEventListener('touchstart', function(e) {
-                    console.log('Touch detectado:', e.touches.length);
-                }, { passive: true });
-                
-                // Prevenir zoom en double tap pero permitir scroll
-                document.addEventListener('touchend', function(e) {
-                    const now = (new Date()).getTime();
-                    if (now - lastTouchEnd <= 300) {
-                        e.preventDefault();
-                    }
-                    lastTouchEnd = now;
-                }, false);
-                
-                let lastTouchEnd = 0;
-            } else {
-                console.log('No es móvil - manteniendo comportamiento normal');
+                // Asegurar scroll
+                document.body.scrollTop = 0;
+                window.scrollTo(0, 1);
+                setTimeout(() => window.scrollTo(0, 0), 100);
             }
-            
-            // APLICAR SCROLL FORZADO SIEMPRE (BACKUP)
-            setTimeout(() => {
-                console.log('Aplicando scroll forzado como backup');
-                document.body.style.overflow = 'visible';
-                document.body.style.overflowY = 'scroll';
-                document.documentElement.style.overflow = 'visible';
-                document.documentElement.style.overflowY = 'scroll';
-                
-                // INDICADOR VISUAL TEMPORAL
-                const debugDiv = document.createElement('div');
-                debugDiv.innerHTML = 'DEBUG: Scroll activado ' + new Date().toLocaleTimeString();
-                debugDiv.style.cssText = `
-                    position: fixed;
-                    bottom: 10px;
-                    left: 10px;
-                    background: red;
-                    color: white;
-                    padding: 10px;
-                    z-index: 99999;
-                    font-size: 12px;
-                    border-radius: 5px;
-                `;
-                document.body.appendChild(debugDiv);
-                
-                // Remover después de 5 segundos
-                setTimeout(() => {
-                    debugDiv.remove();
-                }, 5000);
-            }, 1000);
         });
         
         // Google Sheets API configuration
