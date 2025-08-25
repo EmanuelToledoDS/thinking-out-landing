@@ -17,33 +17,16 @@
             line-height: 1.6;
             color: #ffffff;
             background: linear-gradient(135deg, #1a0a0f 0%, #2d1219 50%, #0f0507 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-            overflow-y: visible;
-            -webkit-overflow-scrolling: touch;
-            position: relative;
-            touch-action: manipulation;
-            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
         }
         
-        /* Mobile scroll optimization - FIXED */
+        /* Mobile optimization - SIMPLE */
         @media (max-width: 768px) {
             html, body {
-                overflow: visible !important;
-                -webkit-overflow-scrolling: touch !important;
-                height: auto !important;
-                min-height: 100vh !important;
-                position: static !important;
-                width: 100% !important;
-            }
-            
-            body {
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                -webkit-touch-callout: none;
-                -webkit-tap-highlight-color: transparent;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+                height: auto;
             }
         }
         
@@ -3633,27 +3616,7 @@ Para más información, visite: www.thinkingout.com`;
             }
         }
         
-        // Touch device detection (simplified)
-        function addTouchSupport() {
-            try {
-                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-                if (isTouchDevice) {
-                    document.body.classList.add('touch-device');
-                }
-            } catch (error) {
-                console.error('Error adding touch support:', error);
-            }
-        }
-        
-        // Inicializar soporte táctil cuando carga la página
-        document.addEventListener('DOMContentLoaded', addTouchSupport);
-        
-        // Si el DOM ya está cargado
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', addTouchSupport);
-        } else {
-            addTouchSupport();
-        }
+        // Touch support removed to fix mobile scroll
         
         // Google Sheets Integration
         // Google Apps Script URL - CONFIGURADO
