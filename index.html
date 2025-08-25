@@ -3633,20 +3633,12 @@ Para más información, visite: www.thinkingout.com`;
             }
         }
         
-        // Touch event optimization for mobile
+        // Touch device detection (simplified)
         function addTouchSupport() {
             try {
-                // Detectar si es dispositivo táctil
                 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-                
                 if (isTouchDevice) {
-                    // Agregar clase para identificar dispositivos táctiles
                     document.body.classList.add('touch-device');
-                    
-                    // Touch support sin bloquear el scroll
-                    document.addEventListener('touchstart', function(e) {
-                        // Solo mejorar el tapping, no bloquear scroll
-                    }, { passive: true });
                 }
             } catch (error) {
                 console.error('Error adding touch support:', error);
