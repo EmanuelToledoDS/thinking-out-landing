@@ -3643,14 +3643,10 @@ Para más información, visite: www.thinkingout.com`;
                     // Agregar clase para identificar dispositivos táctiles
                     document.body.classList.add('touch-device');
                     
-                    // Mejorar rendimiento de scroll en móviles
-                    document.addEventListener('touchmove', function(e) {
-                        // Permitir scroll solo en elementos scrolleables
-                        if (e.target.closest('.calendar-container') || e.target.closest('.message-to-copy textarea')) {
-                            return;
-                        }
-                        e.preventDefault();
-                    }, { passive: false });
+                    // Touch support sin bloquear el scroll
+                    document.addEventListener('touchstart', function(e) {
+                        // Solo mejorar el tapping, no bloquear scroll
+                    }, { passive: true });
                 }
             } catch (error) {
                 console.error('Error adding touch support:', error);
