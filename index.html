@@ -1899,28 +1899,14 @@
             text-align: center;
         }
         
-        /* Mobile Responsiveness - SIMPLE Y DIRECTO */
+        /* Mobile optimized - CORRECTED */
         @media (max-width: 768px) {
             html, body {
-                overflow: scroll !important;
-                -webkit-overflow-scrolling: touch !important;
-                height: auto !important;
-                position: relative !important;
+                overflow-x: hidden;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                height: auto;
             }
-            
-            .bg-animation {
-                position: absolute !important;
-                height: 200vh !important;
-            }
-        }
-        
-        /* Móvil simplificado */
-        @media (max-width: 768px) {
-            body {
-                overflow: auto !important;
-                -webkit-overflow-scrolling: touch !important;
-            }
-        }
             
             .notification {
                 right: 10px;
