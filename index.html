@@ -9,7 +9,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            touch-action: manipulation;
         }
         
         body {
@@ -36,8 +35,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            min-height: 100vh;
-            height: 100%;
+            height: 200vh;
             background: 
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
@@ -73,14 +71,11 @@
             .container {
                 padding: 0 15px;
                 width: 100%;
-                overflow: hidden;
             }
             
-            /* Ensure all sections are visible and scrollable */
             .section {
                 padding: 50px 0;
                 width: 100%;
-                overflow: hidden;
             }
             
             .hero {
@@ -2815,34 +2810,14 @@
     </div>
 
     <script>
-        // Arreglo móvil simple y directo
+        // Mobile scroll fix - minimal approach
         (function() {
-            // Aplicar inmediatamente
+            // Only set basic styles without forcing heights
             if (window.innerWidth <= 768 || 'ontouchstart' in window) {
-                document.documentElement.style.overflow = 'auto';
-                document.documentElement.style.WebkitOverflowScrolling = 'touch';
-                document.body.style.overflow = 'auto';
-                document.body.style.WebkitOverflowScrolling = 'touch';
-                document.body.style.minHeight = '100vh';
+                document.documentElement.style.overflow = 'visible';
+                document.body.style.overflow = 'visible';
             }
         })();
-        
-        // Al cargar la página
-        window.addEventListener('load', function() {
-            if (window.innerWidth <= 768 || 'ontouchstart' in window) {
-                // Quitar position fixed del background
-                const bg = document.querySelector('.bg-animation');
-                if (bg) {
-                    bg.style.position = 'absolute';
-                    bg.style.height = '100%';
-                }
-                
-                // Asegurar scroll
-                document.body.scrollTop = 0;
-                window.scrollTo(0, 1);
-                setTimeout(() => window.scrollTo(0, 0), 100);
-            }
-        });
         
         // Google Sheets API configuration
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxJb2j-LGi5KPH3Wuq8UfgWvZ9NvCHvDbGdR8/exec';
