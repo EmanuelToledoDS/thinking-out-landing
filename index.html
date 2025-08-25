@@ -19,20 +19,21 @@
             background: linear-gradient(135deg, #1a0a0f 0%, #2d1219 50%, #0f0507 100%);
             min-height: 100vh;
             overflow-x: hidden;
-            overflow-y: auto;
+            overflow-y: visible;
             -webkit-overflow-scrolling: touch;
             position: relative;
-            touch-action: pan-y;
+            touch-action: manipulation;
             scroll-behavior: smooth;
         }
         
-        /* Mobile scroll optimization - IMPROVED */
+        /* Mobile scroll optimization - FIXED */
         @media (max-width: 768px) {
             html, body {
-                overflow: auto !important;
+                overflow: visible !important;
                 -webkit-overflow-scrolling: touch !important;
                 height: auto !important;
-                position: relative !important;
+                min-height: 100vh !important;
+                position: static !important;
                 width: 100% !important;
             }
             
@@ -67,9 +68,9 @@
         
         @media (max-width: 768px) {
             .bg-animation {
-                position: absolute !important;
-                height: 100% !important;
-                min-height: 100vh !important;
+                position: fixed !important;
+                height: 100vh !important;
+                min-height: auto !important;
                 animation: none; /* Disable animation on mobile for better performance */
             }
         }
